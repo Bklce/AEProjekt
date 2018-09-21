@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.OleDb;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.OleDb;
+
 
 namespace WindowsFormsApplication1.database
 {
@@ -17,25 +13,25 @@ namespace WindowsFormsApplication1.database
             connection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..\\..\\..\\..\\Database11.accdb");
         }
 
-        public void open()
+        public void Open()
         {
             connection.Open();
         }
 
-        public void close()
+        public void Close()
         {
             connection.Close();
         }
 
-        public OleDbConnection getConnection()
+        public OleDbConnection GetConnection()
         {
             return this.connection;
         }
 
-        public static DBConnection getInstance()
+        public static DBConnection GetInstance()
         {
             if (instance == null)
-                DBConnection.instance = new DBConnection();
+               instance = new DBConnection();
 
             return instance;
         }

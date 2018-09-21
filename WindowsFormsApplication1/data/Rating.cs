@@ -1,5 +1,5 @@
 ﻿
-namespace Seriendatenbank.data
+namespace WindowsFormsApplication1.data
 {
     class Rating
     {
@@ -53,31 +53,31 @@ namespace Seriendatenbank.data
                 this.id_user = id_user;
             }
 
-            public RatingBuilder setFavorite(bool favorite)
+            public RatingBuilder SetFavorite(bool favorite)
             {
                 this.favorite = favorite;
                 return this;
             }
 
-            public RatingBuilder setMarked(bool marked)
+            public RatingBuilder SetMarked(bool marked)
             {
                 this.marked = marked;
                 return this;
             }
 
-            public RatingBuilder setSeen(bool seen)
+            public RatingBuilder SetSeen(bool seen)
             {
                 this.seen = seen;
                 return this;
             }
 
-            public RatingBuilder setRating(int rating)
+            public RatingBuilder SetRating(int rating)
             {
                 this.rating = rating;
                 return this;
             }
 
-            public Rating build()
+            public Rating Build()
             {
                 return new Rating(this.id_series, id_user, favorite, marked, seen, rating);
             }    

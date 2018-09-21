@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1.util
 {
@@ -13,7 +9,7 @@ namespace WindowsFormsApplication1.util
 
         public Hash(string password)
         {
-            generateHash(password);
+            GenerateHash(password);
         }
 
         public Hash(string hashValue, string salt)
@@ -28,13 +24,13 @@ namespace WindowsFormsApplication1.util
         public string Salt
         { get; }
 
-        private string generateHash(string password)
+        private string GenerateHash(string password)
         {
-            salt = generateSalt();
+            salt = GenerateSalt();
             throw new NotImplementedException();
         }
 
-        private string generateSalt()
+        private string GenerateSalt()
         {
             throw new NotImplementedException();
         }
