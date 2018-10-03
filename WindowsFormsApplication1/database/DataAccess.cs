@@ -33,7 +33,7 @@ namespace WindowsFormsApplication1.database
             connection = DBConnection.GetInstance().GetConnection();
         }
 
-        public DataAccess GetInstance()
+        public static DataAccess GetInstance()
         {
             if (instance == null)
                 instance = new DataAccess();
