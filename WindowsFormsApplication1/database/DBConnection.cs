@@ -25,7 +25,7 @@ namespace WindowsFormsApplication1.database
 
         public OleDbConnection GetConnection()
         {
-            return this.connection;
+            return connection;
         }
 
         public static DBConnection GetInstance()

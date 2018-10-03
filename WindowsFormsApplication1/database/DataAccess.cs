@@ -53,9 +53,9 @@ namespace WindowsFormsApplication1.database
 
                 Hash hash = new Hash(password);
                 byte[] hashedPassword = hash.HashValue;
-                command.Parameters.Add("@Hash", OleDbType.LongVarWChar, hashedPassword.Length).Value = hashedPassword;
+                command.Parameters.Add("@Hash", OleDbType.Binary, hashedPassword.Length).Value = hashedPassword;
                 byte[] salt = hash.Salt;
-                command.Parameters.Add("@Salt", OleDbType.LongVarWChar, salt.Length).Value = salt;
+                command.Parameters.Add("@Salt", OleDbType.Binary, salt.Length).Value = salt;
 
                 if (command.ExecuteNonQuery() > 0)
                     return true;
@@ -83,7 +83,7 @@ namespace WindowsFormsApplication1.database
                 OleDbDataReader reader = command.ExecuteReader();
 
                 if (reader.Read())
-                    return new User(Int32.Parse(reader["id_series"].ToString()), reader["benutzername"].ToString(), new Hash(System.Text.Encoding.UTF8.GetBytes(reader["hash"].ToString()), System.Text.Encoding.UTF8.GetBytes(reader["salt"].ToString())));
+                    return new User(Int32.Parse(reader["id_benutzer"].ToString()), reader["benutzername"].ToString(), new Hash((byte[])reader["hash"], (byte[])reader["salt"]));
                 return null;
             }
             catch (Exception e)

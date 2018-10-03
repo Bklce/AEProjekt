@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
@@ -27,10 +28,14 @@ namespace WindowsFormsApplication1.util
         }
 
         public byte[] HashValue
-        { get; }
+        {
+            get { return hashValue; }
+        }
 
         public byte[] Salt
-        { get; }
+        {
+            get { return salt; }
+        }
 
         private void GenerateHash(string password)
         {
@@ -66,9 +71,8 @@ namespace WindowsFormsApplication1.util
         public override bool Equals(object obj)
         {
             var hash = obj as Hash;
-            return hash != null &&
-                   hashValue == hash.hashValue &&
-                   salt == hash.salt;
+            return hash != null && ((IStructuralEquatable)hashValue).Equals(hash.hashValue, StructuralComparisons.StructuralEqualityComparer) &&
+                ((IStructuralEquatable)salt).Equals(hash.salt, StructuralComparisons.StructuralEqualityComparer);
         }
 
         public override int GetHashCode()

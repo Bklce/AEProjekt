@@ -3,21 +3,14 @@ namespace WindowsFormsApplication1.data
 {
     class Rating
     {
-        private int id_series;
-        private int id_user;
-        private bool favorite;
-        private bool marked;
-        private bool seen;
-        private int ratingValue;
-
         private Rating(int id_series, int id_user, bool favorite, bool marked, bool seen, int rating)
         {
-            this.id_series = id_series;
-            this.id_user = id_user;
-            this.favorite = favorite;
-            this.marked = marked;
-            this.seen = seen;
-            this.ratingValue = rating;
+            Id_series = id_series;
+            Id_user = id_user;
+            Favorite = favorite;
+            Marked = marked;
+            Seen = seen;
+            RatingValue = rating;
         }
 
         public int Id_series
@@ -26,13 +19,13 @@ namespace WindowsFormsApplication1.data
         public int Id_user
         { get; set; }
 
-        public int Favorite
+        public bool Favorite
         { get; set; }
 
-        public int Marked
+        public bool Marked
         { get; set; }
 
-        public int Seen
+        public bool Seen
         { get; set; }
 
         public int RatingValue
@@ -79,7 +72,7 @@ namespace WindowsFormsApplication1.data
 
             public Rating Build()
             {
-                return new Rating(this.id_series, id_user, favorite, marked, seen, rating);
+                return new Rating(id_series, id_user, favorite, marked, seen, rating);
             }    
         }
     }

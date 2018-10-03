@@ -17,7 +17,7 @@ namespace WindowsFormsApplication1
         private void btn_login_Click(object sender, EventArgs e)
         {
             User user = dataAccess.GetUser(txbx_Username.Text);
-            if(new Hash(txbx_Password.Text, user.Hash.Salt).Equals(user.Hash))
+            if(user != null && new Hash(txbx_Password.Text, user.Hash.Salt).Equals(user.Hash))
                 MessageBox.Show("Erfolg");
             else
                  MessageBox.Show("Benutzername oder Password scheinen falsch");

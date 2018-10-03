@@ -4,15 +4,11 @@ namespace WindowsFormsApplication1.data
 {
     class User
     {
-        private int id;
-        private string username;
-        private Hash hash;
-
         public User(int id, string username, Hash hash)
         {
-            this.id = id;
-            this.username = username;
-            this.hash = hash;
+            Id = id;
+            Username = username;
+            Hash = hash;
         }
 
         public User(int id, string username): this(id, username, null)
