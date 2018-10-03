@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
-namespace WindowsFormsApplication1.util
+namespace Seriendatenbank.util
 {
-    class Hash
+    public class Hash
     {
         private const sbyte SALT_LENGTH = 32;
         private byte[] hashValue;

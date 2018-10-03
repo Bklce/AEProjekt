@@ -1,7 +1,7 @@
 ﻿
-namespace WindowsFormsApplication1.data
+namespace Seriendatenbank.data
 {
-    class Rating
+    public class Rating
     {
         private Rating(int id_series, int id_user, bool favorite, bool marked, bool seen, int rating)
         {

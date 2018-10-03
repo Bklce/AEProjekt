@@ -1,9 +1,9 @@
 ﻿
 using System.Collections.Generic;
 
-namespace WindowsFormsApplication1.data
+namespace Seriendatenbank.data
 {
-    class Series
+    public class Series
     {
         public Series(int id_series, string seriesName, byte[] picture, string description, List<Genre> genres, int numberOfSeasons)
         {

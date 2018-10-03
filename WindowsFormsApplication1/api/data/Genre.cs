@@ -1,7 +1,7 @@
 ﻿
-namespace WindowsFormsApplication1.data
+namespace Seriendatenbank.data
 {
-    class Genre
+    public class Genre
     {
         public Genre(int id_genre, string description)
         {

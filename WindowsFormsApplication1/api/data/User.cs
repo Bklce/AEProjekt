@@ -1,8 +1,8 @@
-﻿using WindowsFormsApplication1.util;
+﻿using Seriendatenbank.util;
 
-namespace WindowsFormsApplication1.data
+namespace Seriendatenbank.data
 {
-    class User
+    public class User
     {
         public User(int id, string username, Hash hash)
         {

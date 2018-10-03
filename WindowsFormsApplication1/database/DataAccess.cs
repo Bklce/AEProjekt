@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
-using WindowsFormsApplication1.api;
-using WindowsFormsApplication1.data;
-using WindowsFormsApplication1.util;
+using Seriendatenbank.api;
+using Seriendatenbank.data;
+using Seriendatenbank.util;
 
-namespace WindowsFormsApplication1.database
+namespace Seriendatenbank.database
 {
-    class DataAccess : IDataAccess
+    public class DataAccess : IDataAccess
     {
         private const string ADD_USER = "INSERT INTO benutzer (benutzername, hash, salt) VALUES (@Benutzername, @Hash, @Salt)";
         private const string GET_USER = "SELECT * from benutzer WHERE benutzername = @Benutzername";

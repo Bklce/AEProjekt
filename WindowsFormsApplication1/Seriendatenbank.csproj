@@ -66,17 +66,41 @@
     <Compile Include="api\data\Rating.cs" />
     <Compile Include="api\data\Series.cs" />
     <Compile Include="api\data\User.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="ui\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ui\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ui\usercontrols\UcForgotPassword.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcForgotPassword.Designer.cs">
+      <DependentUpon>UcForgotPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcLogin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcLogin.Designer.cs">
+      <DependentUpon>UcLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcTemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcTemplate.Designer.cs">
+      <DependentUpon>UcTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcRegister.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcRegister.Designer.cs">
+      <DependentUpon>UcRegister.cs</DependentUpon>
+    </Compile>
     <Compile Include="util\Hash.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="ui\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -87,6 +111,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ui\usercontrols\UcForgotPassword.resx">
+      <DependentUpon>UcForgotPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\UcLogin.resx">
+      <DependentUpon>UcLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\UcTemplate.resx">
+      <DependentUpon>UcTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\UcRegister.resx">
+      <DependentUpon>UcRegister.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -107,6 +143,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

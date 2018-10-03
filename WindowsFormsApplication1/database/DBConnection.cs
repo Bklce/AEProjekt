@@ -1,7 +1,7 @@
 ﻿using System.Data.OleDb;
 
 
-namespace WindowsFormsApplication1.database
+namespace Seriendatenbank.database
 {
     class DBConnection
     {

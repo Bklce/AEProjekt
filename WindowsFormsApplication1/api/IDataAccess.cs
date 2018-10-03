@@ -1,8 +1,8 @@
 ﻿
 using System.Collections.Generic;
-using WindowsFormsApplication1.data;
+using Seriendatenbank.data;
 
-namespace WindowsFormsApplication1.api
+namespace Seriendatenbank.api
 {
     interface IDataAccess
     {
