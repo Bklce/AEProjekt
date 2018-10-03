@@ -10,7 +10,7 @@ namespace WindowsFormsApplication1.database
 
         private DBConnection()
         {
-            connection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..\\..\\..\\..\\Database11.accdb");
+            connection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..\\..\\..\\Database11.accdb");
         }
 
         public void Open()

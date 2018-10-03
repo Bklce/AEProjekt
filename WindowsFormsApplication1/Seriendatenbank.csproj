@@ -59,12 +59,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="api\IDataAccess.cs" />
     <Compile Include="database\DataAccess.cs" />
     <Compile Include="database\DBConnection.cs" />
-    <Compile Include="data\Genre.cs" />
-    <Compile Include="data\Rating.cs" />
-    <Compile Include="data\Series.cs" />
-    <Compile Include="data\User.cs" />
+    <Compile Include="api\data\Genre.cs" />
+    <Compile Include="api\data\Rating.cs" />
+    <Compile Include="api\data\Series.cs" />
+    <Compile Include="api\data\User.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

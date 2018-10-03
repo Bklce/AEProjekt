@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
+using WindowsFormsApplication1.api;
 using WindowsFormsApplication1.data;
 using WindowsFormsApplication1.util;
 
 namespace WindowsFormsApplication1.database
 {
-    class DataAccess
+    class DataAccess : IDataAccess
     {
         private const string ADD_USER = "INSERT INTO benutzer (benutzername, hash, salt) VALUES (@Benutzername, @Hash, @Salt)";
         private const string GET_USER = "SELECT * from benutzer WHERE benutername = @Benutzername";
@@ -51,9 +52,9 @@ namespace WindowsFormsApplication1.database
                 command.Parameters.Add("@Benutzername", OleDbType.VarWChar, username.Length).Value = username;
 
                 Hash hash = new Hash(password);
-                string hashedPassword = hash.HashValue;
+                byte[] hashedPassword = hash.HashValue;
                 command.Parameters.Add("@Hash", OleDbType.LongVarWChar, hashedPassword.Length).Value = hashedPassword;
-                string salt = hash.Salt;
+                byte[] salt = hash.Salt;
                 command.Parameters.Add("@Salt", OleDbType.LongVarWChar, salt.Length).Value = salt;
 
                 if (command.ExecuteNonQuery() > 0)
@@ -62,7 +63,9 @@ namespace WindowsFormsApplication1.database
                 return false;
             }
             catch (Exception e)
-            { /*log?*/ }
+            {
+                Console.WriteLine(e);
+            }
             finally
             { connection.Close(); }
 
@@ -80,11 +83,13 @@ namespace WindowsFormsApplication1.database
                 OleDbDataReader reader = command.ExecuteReader();
 
                 if (reader.Read())
-                    return new User(Int32.Parse(reader["id_series"].ToString()), reader["benutzername"].ToString(), new Hash(reader["hash"].ToString(), reader["salt"].ToString()));
+                    return new User(Int32.Parse(reader["id_series"].ToString()), reader["benutzername"].ToString(), new Hash(System.Text.Encoding.UTF8.GetBytes(reader["hash"].ToString()), System.Text.Encoding.UTF8.GetBytes(reader["salt"].ToString())));
                 return null;
             }
             catch (Exception e)
-            { /*log?*/ }
+            {
+                Console.WriteLine("\nGetUser: " + e);
+            }
             finally
             { connection.Close(); }
 
@@ -99,9 +104,9 @@ namespace WindowsFormsApplication1.database
                 OleDbCommand command = new OleDbCommand(UPDATE_USER_PASSWORD, connection);
 
                 Hash hash = new Hash(password);
-                string hashedPassword = hash.HashValue;
+                byte[] hashedPassword = hash.HashValue;
                 command.Parameters.Add("@Hash", OleDbType.LongVarWChar, hashedPassword.Length).Value = hashedPassword;
-                string salt = hash.Salt;
+                byte[] salt = hash.Salt;
                 command.Parameters.Add("@Salt", OleDbType.LongVarWChar, salt.Length).Value = salt;
 
                 if (command.ExecuteNonQuery() > 0)
@@ -110,14 +115,16 @@ namespace WindowsFormsApplication1.database
                 return false;
             }
             catch (Exception e)
-            { /*log?*/ }
+            {
+                Console.WriteLine("\nUpdateUserPassword: " + e);
+            }
             finally
             { connection.Close(); }
 
             return false;
         }
 
-        public bool UpdateUserUSername(int id_user, string username)
+        public bool UpdateUserUsername(int id_user, string username)
         {
             connection.Open();
             try
@@ -133,7 +140,9 @@ namespace WindowsFormsApplication1.database
                 return false;
             }
             catch (Exception e)
-            { /*log?*/ }
+            {
+                Console.WriteLine("\nUpdateUserUsername: " + e);
+            }
             finally
             { connection.Close(); }
 
@@ -156,7 +165,9 @@ namespace WindowsFormsApplication1.database
                 return false;
             }
             catch (Exception e)
-            { /*log?*/ }
+            {
+                Console.WriteLine("\nAddGenre: " + e);
+            }
             finally
             { connection.Close(); }
 
@@ -182,7 +193,9 @@ namespace WindowsFormsApplication1.database
                 return null;
             }
             catch (Exception e)
-            { /*log?*/ }
+            {
+                Console.WriteLine("\nGetGenres: " + e);
+            }
             finally
             { connection.Close(); }
 
@@ -197,7 +210,9 @@ namespace WindowsFormsApplication1.database
                 throw new NotImplementedException();
             }
             catch (Exception e)
-            { /*log?*/ }
+            {
+                Console.WriteLine("\nAddRating: " + e);
+            }
             finally
             { connection.Close(); }
 
@@ -212,7 +227,9 @@ namespace WindowsFormsApplication1.database
                 throw new NotImplementedException();
             }
             catch (Exception e)
-            { /*log?*/ }
+            {
+                Console.WriteLine("\nGetRating: " + e);
+            }
             finally
             { connection.Close(); }
 
@@ -227,7 +244,9 @@ namespace WindowsFormsApplication1.database
                 throw new NotImplementedException();
             }
             catch (Exception e)
-            { /*log?*/ }
+            {
+                Console.WriteLine("\nUpdateRating: " + e);
+            }
             finally
             { connection.Close(); }
 
@@ -242,7 +261,9 @@ namespace WindowsFormsApplication1.database
                 throw new NotImplementedException();
             }
             catch (Exception e)
-            { /*log?*/ }
+            {
+                Console.WriteLine("\nGetAverageRatingForSeries: " + e);
+            }
             finally
             { connection.Close(); }
 
@@ -257,7 +278,9 @@ namespace WindowsFormsApplication1.database
                 throw new NotImplementedException();
             }
             catch (Exception e)
-            { /*log?*/ }
+            {
+                Console.WriteLine("\nAddSeries: " + e);
+            }
             finally
             { connection.Close(); }
 
@@ -272,7 +295,9 @@ namespace WindowsFormsApplication1.database
                 throw new NotImplementedException();
             }
             catch (Exception e)
-            { /*log?*/ }
+            {
+                Console.WriteLine("\nGetSeries: " + e);
+            }
             finally
             { connection.Close(); }
 
