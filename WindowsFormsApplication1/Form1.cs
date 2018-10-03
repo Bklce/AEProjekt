@@ -25,9 +25,9 @@ namespace WindowsFormsApplication1
         private void btn_register_Click(object sender, EventArgs e)
         {
             if (dataAccess.AddUser(txbx_Username.Text, txbx_Password.Text))
-                MessageBox.Show("Der Benutzer ist erfolgreich angelegt");
+                MessageBox.Show("Der Benutzer wurde erfolgreich angelegt");
             else
-                MessageBox.Show("Der Benutzer konnte nicht angelegt werden");
+                MessageBox.Show("Der Benutzer konnte nicht angelegt werden (möglicherweise ist der Benutzername bereits vergeben)");
         }
     }
 }

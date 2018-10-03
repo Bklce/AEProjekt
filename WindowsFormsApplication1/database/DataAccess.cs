@@ -47,7 +47,6 @@ namespace WindowsFormsApplication1.database
             connection.Open();
             try
             {
-                //TODO überprüfen ob username bereits existiert (Unique klausel in datenbank)
                 OleDbCommand command = new OleDbCommand(ADD_USER, connection);
                 command.Parameters.Add("@Benutzername", OleDbType.VarWChar, username.Length).Value = username;
 
