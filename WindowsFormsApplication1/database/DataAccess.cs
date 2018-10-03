@@ -10,7 +10,7 @@ namespace WindowsFormsApplication1.database
     class DataAccess : IDataAccess
     {
         private const string ADD_USER = "INSERT INTO benutzer (benutzername, hash, salt) VALUES (@Benutzername, @Hash, @Salt)";
-        private const string GET_USER = "SELECT * from benutzer WHERE benutername = @Benutzername";
+        private const string GET_USER = "SELECT * from benutzer WHERE benutzername = @Benutzername";
         private const string UPDATE_USER_PASSWORD = "UPDATE benutzer SET salt = @Salt, hash = @Hash WHERE benutzername = @Benutzername ";
         private const string UPDATE_USER_USERNAME = "UPDATE benutzer SET benutzername = @Benutzername WHERE id_benutzer = @IdBenutzer ";
         private const string ADD_GENRE = "INSERT INTO genre (bezeichnung) VALUES (@Bezeichnung)";
