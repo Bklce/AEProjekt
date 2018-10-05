@@ -86,6 +86,18 @@
     <Compile Include="ui\usercontrols\UcLogin.Designer.cs">
       <DependentUpon>UcLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="ui\usercontrols\UcSerie.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcSerie.Designer.cs">
+      <DependentUpon>UcSerie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcSeries.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcSeries.Designer.cs">
+      <DependentUpon>UcSeries.cs</DependentUpon>
+    </Compile>
     <Compile Include="ui\usercontrols\UcTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -116,6 +128,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ui\usercontrols\UcLogin.resx">
       <DependentUpon>UcLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\UcSerie.resx">
+      <DependentUpon>UcSerie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\UcSeries.resx">
+      <DependentUpon>UcSeries.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ui\usercontrols\UcTemplate.resx">
       <DependentUpon>UcTemplate.cs</DependentUpon>

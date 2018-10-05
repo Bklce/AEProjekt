@@ -35,5 +35,11 @@
             }
         }
         */
+
+        
+        protected override void clear()
+        {
+
+        }
     }
 }

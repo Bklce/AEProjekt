@@ -3,16 +3,9 @@ using Seriendatenbank.database;
 
 namespace Seriendatenbank.ui.userControls
 {
-    public partial class Template : UserControl
+    public abstract partial class Template : UserControl
     {
         protected DataAccess dataAccess = DataAccess.GetInstance();
-
-        public Template()
-        {
-            InitializeComponent();
-            this.Height = MainWindow.HEIGHT;
-            this.Width = MainWindow.WIDTH;
-        }
 
         protected void BringElementToFront(Template element)
         {
@@ -25,5 +18,7 @@ namespace Seriendatenbank.ui.userControls
             element.Dock = DockStyle.Fill;
             element.BringToFront();
         }
+
+        abstract protected void clear();
     }
 }

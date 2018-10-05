@@ -5,7 +5,7 @@ using Seriendatenbank.util;
 
 namespace Seriendatenbank.ui.userControls
 {
-    public partial class UcLogin : Template
+    public partial class UcLogin : Template, IDisposable
     {
         private static UcLogin instance;
 
@@ -42,7 +42,7 @@ namespace Seriendatenbank.ui.userControls
 
         private void btn_forgot_password_Click(object sender, EventArgs e)
         {
-            BringElementToFront(UcForgotPassword.Instance);   
+            BringElementToFront(UcForgotPassword.Instance);
         }
 
         private void btn_register_Click(object sender, EventArgs e)
@@ -50,6 +50,10 @@ namespace Seriendatenbank.ui.userControls
             BringElementToFront(UcRegister.Instance);
         }
 
-        
+        protected override void clear()
+        {
+            txt_username.Text = "";
+            txt_password.Text = "";
+        }
     }
 }

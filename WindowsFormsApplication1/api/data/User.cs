@@ -15,12 +15,12 @@ namespace Seriendatenbank.data
         {}
 
         public int Id
-        { get; }
+        { get; set; }
 
         public string Username
         { get; set; }
 
         public Hash Hash
-        { get; }
+        { get; set; }
     }
 }

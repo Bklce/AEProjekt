@@ -24,6 +24,11 @@ namespace Seriendatenbank.ui.userControls
         private void button1_Click(object sender, System.EventArgs e)
         {
             BringElementToFront(UcLogin.Instance);
+            this.Dispose();
+        }
+
+        protected override void clear()
+        {
         }
     }
 }

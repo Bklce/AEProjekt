@@ -16,21 +16,21 @@ namespace Seriendatenbank.data
         }
 
         public int Id_series
-        { get; }
+        { get; private set; }
 
         public string SeriesName
-        { get; }
+        { get; private set; }
 
         public byte[] Picture
-        { get; }
+        { get; private set; }
 
         public string Description
-        { get; }
+        { get; private set; }
 
         public List<Genre> Genres
-        { get; }
+        { get; private set; }
 
         public int NumberOfSeasons
-        { get; }
+        { get; private set; }
     }
 }
