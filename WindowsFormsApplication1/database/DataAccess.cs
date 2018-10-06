@@ -296,7 +296,15 @@ namespace Seriendatenbank.database
             connection.Open();
             try
             {
-                throw new NotImplementedException();
+                List<Series> series = new List<Series>();
+                List<Genre> genres = new List<Genre>();
+                genres.Add(new Genre(1, "Gen1"));
+                genres.Add(new Genre(1, "Gen2"));
+                series.Add(new Series(1, "Test1", new byte[10], "This is a description", genres, 2));
+                series.Add(new Series(2, "Test2", new byte[10], "This is a description", genres, 2));
+                series.Add(new Series(3, "Test3", new byte[10], "This is a description", genres, 2));
+                series.Add(new Series(4, "Test4", new byte[10], "This is a description", genres, 2));
+                return series;
             }
             catch (Exception e)
             {

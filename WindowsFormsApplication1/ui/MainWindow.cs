@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Seriendatenbank.ui.userControls;
+using WindowsFormsApplication1.ui.usercontrols;
 
 namespace Seriendatenbank
 {
@@ -31,6 +32,7 @@ namespace Seriendatenbank
                 { typeof(UcLogin), () => BringElementToFront(UcLogin.Instance)},
                 { typeof(UcRegister), () => BringElementToFront(UcRegister.Instance)},
                 { typeof(UcForgotPassword), () => BringElementToFront(UcForgotPassword.Instance) },
+                { typeof(UcSeries), () => BringElementToFront(UcSeries.Instance) },
             }; 
             @direct[dst.GetType()]();
 
@@ -40,6 +42,7 @@ namespace Seriendatenbank
                 { typeof(UcLogin), () => UcLogin.Reset()},
                 { typeof(UcRegister), () =>  UcRegister.Reset()},
                 { typeof(UcForgotPassword), () =>  UcForgotPassword.Reset()},
+                { typeof(UcSeries), () =>  UcSeries.Reset()},
             };
             @dispose[src.GetType()]();
         }

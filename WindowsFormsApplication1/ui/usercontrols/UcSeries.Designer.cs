@@ -28,18 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.tlPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SuspendLayout();
+            // 
+            // tlPanel
+            // 
+            this.tlPanel.ColumnCount = 3;
+            this.tlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.89107F));
+            this.tlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.10893F));
+            this.tlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 207F));
+            this.tlPanel.Location = new System.Drawing.Point(48, 36);
+            this.tlPanel.Name = "tlPanel";
+            this.tlPanel.RowCount = 2;
+            this.tlPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlPanel.Size = new System.Drawing.Size(671, 399);
+            this.tlPanel.TabIndex = 0;
             // 
             // UcSeries
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tlPanel);
             this.Name = "UcSeries";
-            this.Size = new System.Drawing.Size(828, 439);
+            this.Size = new System.Drawing.Size(779, 459);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.TableLayoutPanel tlPanel;
     }
 }

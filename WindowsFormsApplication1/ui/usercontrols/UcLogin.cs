@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Seriendatenbank.data;
 using Seriendatenbank.util;
+using WindowsFormsApplication1.ui.usercontrols;
 
 namespace Seriendatenbank.ui.userControls
 {
@@ -34,7 +35,7 @@ namespace Seriendatenbank.ui.userControls
             {
                 User user = dataAccess.GetUser(txt_username.Text);
                 if (user != null && new Hash(txt_password.Text, user.Hash.Salt).Equals(user.Hash))
-                    MessageBox.Show("Erfolg");
+                    Notify(this, UcSeries.Instance);
                 else
                     MessageBox.Show("Benutzername oder Passwort scheinen falsch");
             }

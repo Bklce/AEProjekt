@@ -35,7 +35,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "UcSerie";
-            this.Size = new System.Drawing.Size(757, 450);
+            this.Size = new System.Drawing.Size(207, 184);
             this.ResumeLayout(false);
 
         }
