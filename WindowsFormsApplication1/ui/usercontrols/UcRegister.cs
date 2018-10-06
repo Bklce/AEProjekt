@@ -1,4 +1,6 @@
-﻿namespace Seriendatenbank.ui.userControls
+﻿using System;
+using System.Windows.Forms;
+namespace Seriendatenbank.ui.userControls
 {
     public partial class UcRegister : Template
     {
@@ -19,27 +21,31 @@
             InitializeComponent();
         }
 
-        /*
-        private void btn_register_Click(object sender, EventArgs e)
+        private void btn_registrieren_Click(object sender, System.EventArgs e)
         {
             if (String.IsNullOrWhiteSpace(txt_username.Text))
                 MessageBox.Show("Benutzername darf nicht leer sein");
             else if (String.IsNullOrWhiteSpace(txt_password.Text))
                 MessageBox.Show("Passwort darf nicht leer sein");
+            else if (String.IsNullOrWhiteSpace(txt_password2.Text))
+                MessageBox.Show("Das Passwort muss wiederholt werden");
+            else if (txt_password.Text != txt_password2.Text)
+                MessageBox.Show("Die Passwörter stimmen nicht überein");
             else
             {
                 if (dataAccess.AddUser(txt_username.Text, txt_password.Text))
+                {
                     MessageBox.Show("Der Benutzer wurde erfolgreich angelegt");
+                    BringElementToFront(UcLogin.Instance);
+                }
                 else
                     MessageBox.Show("Der Benutzer konnte nicht angelegt werden (möglicherweise ist der Benutzername bereits vergeben)");
             }
         }
-        */
 
-        
-        protected override void clear()
+        private void btn_abbrechen_Click(object sender, EventArgs e)
         {
-
+            BringElementToFront(UcLogin.Instance);
         }
     }
 }
