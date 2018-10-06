@@ -4,7 +4,7 @@ namespace Seriendatenbank.ui.userControls
 {
     public partial class UcForgotPassword : Template
     {
-        private static UcForgotPassword instance;
+        private static UcForgotPassword instance = null;
 
         public static UcForgotPassword Instance
         {
@@ -16,19 +16,19 @@ namespace Seriendatenbank.ui.userControls
             }
         }
 
-        public UcForgotPassword()
+        private UcForgotPassword()
         {
             InitializeComponent();
         }
 
         private void button1_Click(object sender, System.EventArgs e)
         {
-            BringElementToFront(UcLogin.Instance);
-            this.Dispose();
+            Notify(this, UcLogin.Instance);
         }
 
-        protected override void clear()
+        public static void Reset()
         {
+            instance = null;
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Seriendatenbank.ui.userControls
 {
     public partial class UcRegister : Template
     {
-        private static UcRegister instance;
+        private static UcRegister instance = null;
 
         public static UcRegister Instance
         {
@@ -16,7 +16,7 @@ namespace Seriendatenbank.ui.userControls
             }
         }
 
-        public UcRegister()
+        private UcRegister()
         {
             InitializeComponent();
         }
@@ -45,7 +45,12 @@ namespace Seriendatenbank.ui.userControls
 
         private void btn_abbrechen_Click(object sender, EventArgs e)
         {
-            BringElementToFront(UcLogin.Instance);
+            Notify(this, UcLogin.Instance);
+        }
+
+        public static void Reset()
+        {
+            instance = null;
         }
     }
 }
