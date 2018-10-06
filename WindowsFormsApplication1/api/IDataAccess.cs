@@ -8,8 +8,8 @@ namespace Seriendatenbank.api
     {
         bool AddUser(string username, string password);
         User GetUser(string username);
-        bool UpdateUserPassword(int id_user, string password);
-        bool UpdateUserUsername(int id_user, string username);
+        bool UpdateUserPassword(string username, string password);
+        bool UpdateUserUsername(string username, string usernameNew);
         bool AddGenre(string genre);
         List<Genre> GetGenres();
         bool AddRating(int id_series, int id_user, int ratingValue);

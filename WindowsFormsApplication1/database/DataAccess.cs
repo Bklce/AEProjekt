@@ -11,8 +11,8 @@ namespace Seriendatenbank.database
     {
         private const string ADD_USER = "INSERT INTO benutzer (benutzername, hash, salt) VALUES (@Benutzername, @Hash, @Salt)";
         private const string GET_USER = "SELECT * from benutzer WHERE benutzername = @Benutzername";
-        private const string UPDATE_USER_PASSWORD = "UPDATE benutzer SET salt = @Salt, hash = @Hash WHERE benutzername = @Benutzername ";
-        private const string UPDATE_USER_USERNAME = "UPDATE benutzer SET benutzername = @Benutzername WHERE id_benutzer = @IdBenutzer ";
+        private const string UPDATE_USER_PASSWORD = "UPDATE benutzer SET salt = @Salt, hash = @Hash WHERE benutzername = @Benutzername";
+        private const string UPDATE_USER_USERNAME = "UPDATE benutzer SET benutzername = @Benutzername WHERE benutzername = @IdBenutzerNeu";
         private const string ADD_GENRE = "INSERT INTO genre (bezeichnung) VALUES (@Bezeichnung)";
         private const string GET_GENRES = "SELECT * FROM genre";
         private const string ADD_RATING = "INSERT INTO bewertung (id_serie, id_benutzer, favorit, vorgemerkt, gesehen, rating) VALUES (@IdSerie, @IdBenutzer, @Favorit, @Vorgemerkt, @Gesehen, @Rating)";
@@ -95,18 +95,23 @@ namespace Seriendatenbank.database
             return null;
         }
 
-        public bool UpdateUserPassword(int id_user, string password)
+        public bool UpdateUserPassword(string username, string password)
         {
             connection.Open();
             try
             {
+                //TODO mit addUser zusammenführen
                 OleDbCommand command = new OleDbCommand(UPDATE_USER_PASSWORD, connection);
+                
 
                 Hash hash = new Hash(password);
-                byte[] hashedPassword = hash.HashValue;
-                command.Parameters.Add("@Hash", OleDbType.LongVarWChar, hashedPassword.Length).Value = hashedPassword;
                 byte[] salt = hash.Salt;
-                command.Parameters.Add("@Salt", OleDbType.LongVarWChar, salt.Length).Value = salt;
+                command.Parameters.Add("@Salt", OleDbType.Binary, salt.Length).Value = salt;
+                byte[] hashedPassword = hash.HashValue;
+                command.Parameters.Add("@Hash", OleDbType.Binary, hashedPassword.Length).Value = hashedPassword;
+               
+
+                command.Parameters.Add("@Benutzername", OleDbType.VarWChar, username.Length).Value = username;
 
                 if (command.ExecuteNonQuery() > 0)
                     return true;
@@ -123,7 +128,7 @@ namespace Seriendatenbank.database
             return false;
         }
 
-        public bool UpdateUserUsername(int id_user, string username)
+        public bool UpdateUserUsername(string username, string usernameNew)
         {
             connection.Open();
             try
@@ -131,7 +136,7 @@ namespace Seriendatenbank.database
                 OleDbCommand command = new OleDbCommand(UPDATE_USER_USERNAME, connection);
 
                 command.Parameters.Add("@Benutzername", OleDbType.VarWChar, username.Length).Value = username;
-                command.Parameters.Add("@IdBenutzer", OleDbType.Integer, id_user.ToString().Length).Value = id_user;
+                command.Parameters.Add("@BenutzernameNeu", OleDbType.Integer, usernameNew.Length).Value = usernameNew;
 
                 if (command.ExecuteNonQuery() > 0)
                     return true;
