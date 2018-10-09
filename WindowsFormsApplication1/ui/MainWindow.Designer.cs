@@ -26,25 +26,23 @@
         private void InitializeComponent()
         {
             this.pnl_root = new System.Windows.Forms.Panel();
-            this.pnl_root.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnl_root
             // 
-            this.pnl_root.Location = new System.Drawing.Point(-7, -30);
+            this.pnl_root.Location = new System.Drawing.Point(-1, -1);
             this.pnl_root.Name = "pnl_root";
-            this.pnl_root.Size = new System.Drawing.Size(772, 439);
+            this.pnl_root.Size = new System.Drawing.Size(951, 515);
             this.pnl_root.TabIndex = 0;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(756, 399);
+            this.ClientSize = new System.Drawing.Size(950, 513);
             this.Controls.Add(this.pnl_root);
             this.Name = "MainWindow";
             this.Text = "LogIn";
-            this.pnl_root.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

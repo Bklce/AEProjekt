@@ -35,7 +35,10 @@ namespace Seriendatenbank.ui.userControls
             {
                 User user = dataAccess.GetUser(txt_username.Text);
                 if (user != null && new Hash(txt_password.Text, user.Hash.Salt).Equals(user.Hash))
+                {
                     Notify(this, UcSeries.Instance);
+                    currentUser = user;
+                }
                 else
                     MessageBox.Show("Benutzername oder Passwort scheinen falsch");
             }

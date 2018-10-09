@@ -25,6 +25,7 @@ namespace Seriendatenbank.database
         private const string GET_AVERAGE_RATING = "SELECT durchschnitt FROM serie_rating WHERE id_serie = @IdSerie";
         private const string ADD_SERIES = "INSERT INTO serie (serienname, beschreibung, bild) VALUES (@Serienname, @Beschreibung, @Bild)";
         private const string GET_SERIES = "SELECT * FROM serie WHERE id_serie = @IdSerie";
+        private const string GET_ALL_SERIES = "SELECT * FROM serie";
 
         private static DataAccess instance;
         private OleDbConnection connection;
@@ -103,14 +104,10 @@ namespace Seriendatenbank.database
                 //TODO mit addUser zusammenführen
                 OleDbCommand command = new OleDbCommand(UPDATE_USER_PASSWORD, connection);
                 
-
                 Hash hash = new Hash(password);
-                byte[] salt = hash.Salt;
-                command.Parameters.Add("@Salt", OleDbType.Binary, salt.Length).Value = salt;
-                byte[] hashedPassword = hash.HashValue;
-                command.Parameters.Add("@Hash", OleDbType.Binary, hashedPassword.Length).Value = hashedPassword;
+                command.Parameters.Add("@Salt", OleDbType.Binary, hash.Salt.Length).Value = hash.Salt;
+                command.Parameters.Add("@Hash", OleDbType.Binary, hash.HashValue.Length).Value = hash.HashValue;
                
-
                 command.Parameters.Add("@Benutzername", OleDbType.VarWChar, username.Length).Value = username;
 
                 if (command.ExecuteNonQuery() > 0)
@@ -134,7 +131,6 @@ namespace Seriendatenbank.database
             try
             {
                 OleDbCommand command = new OleDbCommand(UPDATE_USER_USERNAME, connection);
-
                 command.Parameters.Add("@Benutzername", OleDbType.VarWChar, username.Length).Value = username;
                 command.Parameters.Add("@BenutzernameNeu", OleDbType.Integer, usernameNew.Length).Value = usernameNew;
 
@@ -279,7 +275,17 @@ namespace Seriendatenbank.database
             connection.Open();
             try
             {
-                throw new NotImplementedException();
+                OleDbCommand command = new OleDbCommand(ADD_SERIES, connection);
+                command.Parameters.Add("@Serienname", OleDbType.VarWChar, seriesName.Length).Value = seriesName;
+                command.Parameters.Add("@Beschreibung", OleDbType.VarWChar, description.Length).Value = description;
+                command.Parameters.Add("@Bild", OleDbType.Binary, picture.Length).Value = picture;
+
+                //TODO Hinzufügen der Genres, und Staffelanzahl für die Serie
+
+                if (command.ExecuteNonQuery() > 0)
+                    return true;
+
+                return false;
             }
             catch (Exception e)
             {
@@ -296,15 +302,19 @@ namespace Seriendatenbank.database
             connection.Open();
             try
             {
+                OleDbCommand command = new OleDbCommand(GET_ALL_SERIES, connection);
+
+                OleDbDataReader reader = command.ExecuteReader();
                 List<Series> series = new List<Series>();
-                List<Genre> genres = new List<Genre>();
-                genres.Add(new Genre(1, "Gen1"));
-                genres.Add(new Genre(1, "Gen2"));
-                series.Add(new Series(1, "Test1", new byte[10], "This is a description", genres, 2));
-                series.Add(new Series(2, "Test2", new byte[10], "This is a description", genres, 2));
-                series.Add(new Series(3, "Test3", new byte[10], "This is a description", genres, 2));
-                series.Add(new Series(4, "Test4", new byte[10], "This is a description", genres, 2));
-                return series;
+                while (reader.Read())
+                {
+                    series.Add(new Series(Int32.Parse(reader["id_serie"].ToString()), reader["serienname"].ToString(), (byte[])reader["bild"], reader["beschreibung"].ToString(), new List<Genre>
+                        (), -1));
+                }
+
+                if (series.Count > 0)
+                    return series;
+                return null;
             }
             catch (Exception e)
             {

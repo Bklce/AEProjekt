@@ -8,9 +8,6 @@ namespace Seriendatenbank
 {
     public partial class MainWindow : Form
     {
-        public const int HEIGHT = 438;
-        public const int WIDTH = 772;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -33,6 +30,7 @@ namespace Seriendatenbank
                 { typeof(UcRegister), () => BringElementToFront(UcRegister.Instance)},
                 { typeof(UcForgotPassword), () => BringElementToFront(UcForgotPassword.Instance) },
                 { typeof(UcSeries), () => BringElementToFront(UcSeries.Instance) },
+                { typeof(UcAddSeries), () => BringElementToFront(UcAddSeries.Instance) },
             }; 
             @direct[dst.GetType()]();
 
@@ -43,6 +41,7 @@ namespace Seriendatenbank
                 { typeof(UcRegister), () =>  UcRegister.Reset()},
                 { typeof(UcForgotPassword), () =>  UcForgotPassword.Reset()},
                 { typeof(UcSeries), () =>  UcSeries.Reset()},
+                { typeof(UcAddSeries), () =>  UcAddSeries.Reset()},
             };
             @dispose[src.GetType()]();
         }
@@ -54,5 +53,6 @@ namespace Seriendatenbank
             element.Dock = DockStyle.Fill;
             element.BringToFront();
         }
+
     }
 }

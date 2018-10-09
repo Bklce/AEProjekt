@@ -22,13 +22,12 @@ namespace WindowsFormsApplication1.ui.usercontrols
         public UcSeries()
         {
             InitializeComponent();
-
-            ScrollBar vScrollBar1 = new VScrollBar();
-            vScrollBar1.Dock = DockStyle.Right;
-            vScrollBar1.Scroll += (sender, e) => { tlPanel.VerticalScroll.Value = vScrollBar1.Value; };
-            tlPanel.Controls.Add(vScrollBar1);
-
+            
             List<Series> series = dataAccess.GetSeries();
+            for(int i = 0; i< 8; i++)
+            {
+                series.Add(series[0]);
+            }
             int elementCount = 0;
             foreach(Series serie in series)
             {
@@ -38,9 +37,10 @@ namespace WindowsFormsApplication1.ui.usercontrols
                     elementCount = 0;
                 }
 
-                tlPanel.Controls.Add(new SeriesElement(serie), elementCount, tlPanel.RowCount - 1);
+                tlPanel.Controls.Add(new SeriesElement(serie), elementCount, tlPanel.RowCount - 1 );
                 elementCount++;
             }
+            
         }
 
         public static void Reset()
@@ -48,5 +48,14 @@ namespace WindowsFormsApplication1.ui.usercontrols
             instance = null;
         }
 
+        private void btn_add_series_Click(object sender, System.EventArgs e)
+        {
+            Notify(this, UcAddSeries.Instance);
+        }
+
+        private void button3_Click(object sender, System.EventArgs e)
+        {
+            currentUser = null;
+        }
     }
 }
