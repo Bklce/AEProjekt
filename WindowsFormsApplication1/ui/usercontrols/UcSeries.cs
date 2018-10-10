@@ -24,6 +24,7 @@ namespace WindowsFormsApplication1.ui.usercontrols
             InitializeComponent();
             
             List<Series> series = dataAccess.GetSeries();
+            Dictionary<int, Rating> ratings = dataAccess.GetAllRatings(currentUser.Id);
             for(int i = 0; i< 8; i++)
             {
                 series.Add(series[0]);
@@ -56,6 +57,7 @@ namespace WindowsFormsApplication1.ui.usercontrols
         private void button3_Click(object sender, System.EventArgs e)
         {
             currentUser = null;
+            Notify(this, UcLogin.Instance);
         }
     }
 }

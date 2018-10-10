@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Seriendatenbank.ui.userControls;
 using WindowsFormsApplication1.ui.usercontrols;
-using WindowsFormsApplication1.ui;
 
 namespace Seriendatenbank
 {
@@ -21,13 +20,10 @@ namespace Seriendatenbank
             pnl_root.Controls.Add(login);
             login.Dock = DockStyle.Fill;
             login.BringToFront();
-
-          //  Type objType = Type.GetType(typeof(UcLogin).FullName+", " + typeof(UcLogin).AssemblyQualifiedName + ", Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
-          //  UcLogin obj = (UcLogin)Activator.CreateInstance(objType);
         }
 
         //Updaten des angezeigten UserControls, wegräumen des alten
-        public void Update(Template src, UcEvent e)
+        public void Update(Template src, Template dst)
         {
             var direct = new Dictionary<Type, Action> {
                 { typeof(UcLogin), () => BringElementToFront(UcLogin.Instance)},
@@ -36,20 +32,18 @@ namespace Seriendatenbank
                 { typeof(UcSeries), () => BringElementToFront(UcSeries.Instance) },
                 { typeof(UcAddSeries), () => BringElementToFront(UcAddSeries.Instance) },
             }; 
-            @direct[e.Destination.GetType()]();
+            @direct[dst.GetType()]();
 
-            if (e.Dispose) { 
-                pnl_root.Controls.Remove(src);
+            pnl_root.Controls.Remove(src);
 
-                var dispose = new Dictionary<Type, Action> {
-                    { typeof(UcLogin), () => UcLogin.Reset()},
-                    { typeof(UcRegister), () =>  UcRegister.Reset()},
-                    { typeof(UcForgotPassword), () =>  UcForgotPassword.Reset()},
-                    { typeof(UcSeries), () =>  UcSeries.Reset()},
-                    { typeof(UcAddSeries), () =>  UcAddSeries.Reset()},
-                };
-                @dispose[src.GetType()]();
-            }
+            var dispose = new Dictionary<Type, Action> {
+                { typeof(UcLogin), () => UcLogin.Reset()},
+                { typeof(UcRegister), () =>  UcRegister.Reset()},
+                { typeof(UcForgotPassword), () =>  UcForgotPassword.Reset()},
+                { typeof(UcSeries), () =>  UcSeries.Reset()},
+                { typeof(UcAddSeries), () =>  UcAddSeries.Reset()},
+            };
+            @dispose[src.GetType()]();
         }
 
         private void BringElementToFront(Template element)

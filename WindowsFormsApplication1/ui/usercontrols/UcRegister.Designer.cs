@@ -93,7 +93,7 @@
             this.btn_registrieren.Location = new System.Drawing.Point(302, 192);
             this.btn_registrieren.Name = "btn_registrieren";
             this.btn_registrieren.Size = new System.Drawing.Size(75, 23);
-            this.btn_registrieren.TabIndex = 6;
+            this.btn_registrieren.TabIndex = 3;
             this.btn_registrieren.Text = "Registrieren";
             this.btn_registrieren.UseVisualStyleBackColor = true;
             this.btn_registrieren.Click += new System.EventHandler(this.btn_registrieren_Click);
@@ -103,7 +103,7 @@
             this.btn_abbrechen.Location = new System.Drawing.Point(302, 238);
             this.btn_abbrechen.Name = "btn_abbrechen";
             this.btn_abbrechen.Size = new System.Drawing.Size(75, 23);
-            this.btn_abbrechen.TabIndex = 7;
+            this.btn_abbrechen.TabIndex = 4;
             this.btn_abbrechen.Text = "Abbrechen";
             this.btn_abbrechen.UseVisualStyleBackColor = true;
             this.btn_abbrechen.Click += new System.EventHandler(this.btn_abbrechen_Click);

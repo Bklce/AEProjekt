@@ -52,14 +52,14 @@
             this.txt_password.Name = "txt_password";
             this.txt_password.PasswordChar = '*';
             this.txt_password.Size = new System.Drawing.Size(100, 20);
-            this.txt_password.TabIndex = 5;
+            this.txt_password.TabIndex = 1;
             // 
             // txt_username
             // 
             this.txt_username.Location = new System.Drawing.Point(337, 148);
             this.txt_username.Name = "txt_username";
             this.txt_username.Size = new System.Drawing.Size(100, 20);
-            this.txt_username.TabIndex = 6;
+            this.txt_username.TabIndex = 0;
             // 
             // label2
             // 
@@ -75,7 +75,7 @@
             this.btn_login.Location = new System.Drawing.Point(337, 232);
             this.btn_login.Name = "btn_login";
             this.btn_login.Size = new System.Drawing.Size(75, 23);
-            this.btn_login.TabIndex = 9;
+            this.btn_login.TabIndex = 2;
             this.btn_login.Text = "Anmelden";
             this.btn_login.UseVisualStyleBackColor = true;
             this.btn_login.Click += new System.EventHandler(this.btn_login_Click);
@@ -85,7 +85,7 @@
             this.btn_forgot_password.Location = new System.Drawing.Point(241, 279);
             this.btn_forgot_password.Name = "btn_forgot_password";
             this.btn_forgot_password.Size = new System.Drawing.Size(143, 23);
-            this.btn_forgot_password.TabIndex = 10;
+            this.btn_forgot_password.TabIndex = 3;
             this.btn_forgot_password.Text = "Passwort vergessen ,,,";
             this.btn_forgot_password.UseVisualStyleBackColor = true;
             this.btn_forgot_password.Click += new System.EventHandler(this.btn_forgot_password_Click);
@@ -95,12 +95,12 @@
             this.btn_register.Location = new System.Drawing.Point(390, 279);
             this.btn_register.Name = "btn_register";
             this.btn_register.Size = new System.Drawing.Size(143, 23);
-            this.btn_register.TabIndex = 11;
+            this.btn_register.TabIndex = 4;
             this.btn_register.Text = "Registrieren";
             this.btn_register.UseVisualStyleBackColor = true;
             this.btn_register.Click += new System.EventHandler(this.btn_register_Click);
             // 
-            // Login
+            // UcLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -111,7 +111,7 @@
             this.Controls.Add(this.txt_username);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_login);
-            this.Name = "Login";
+            this.Name = "UcLogin";
             this.ResumeLayout(false);
             this.PerformLayout();
 

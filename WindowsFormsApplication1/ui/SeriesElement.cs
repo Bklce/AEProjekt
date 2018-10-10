@@ -15,7 +15,6 @@ namespace WindowsFormsApplication1.ui
             this.serie = serie;
             lbl_series_name.Text = serie.SeriesName;
             pb_series_picture.Image = PictureHelper.BitmapFromByteArray(serie.Picture);
-            lbl_points.Text = serie.AverageRating.ToString();
         }
     }
 }

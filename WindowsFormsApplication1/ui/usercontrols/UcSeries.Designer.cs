@@ -43,9 +43,9 @@
             // 
             this.btn_add_series.Location = new System.Drawing.Point(861, 483);
             this.btn_add_series.Name = "btn_add_series";
-            this.btn_add_series.Size = new System.Drawing.Size(54, 29);
+            this.btn_add_series.Size = new System.Drawing.Size(70, 29);
             this.btn_add_series.TabIndex = 1;
-            this.btn_add_series.Text = "button1";
+            this.btn_add_series.Text = "Hinzufügen";
             this.btn_add_series.UseVisualStyleBackColor = true;
             this.btn_add_series.Click += new System.EventHandler(this.btn_add_series_Click);
             // 

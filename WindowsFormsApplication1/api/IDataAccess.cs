@@ -15,7 +15,7 @@ namespace Seriendatenbank.api
         bool AddRating(int id_series, int id_user, int ratingValue);
         Rating GetRating(int id_series, int id_user);
         bool UpdateRating(int id_series, int id_user, int ratingValue);
-        Dictionary<int, int> GetAverageRatingsForSeries();
+        int GetAverageRatingForSeries(int seriesId);
         bool AddSeries(string seriesName, byte[] picture, string description, List<Genre> genres, int numberOfSeasons);
         List<Series> GetSeries();
     }

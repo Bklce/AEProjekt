@@ -5,7 +5,7 @@ namespace Seriendatenbank.data
 {
     public class Series
     {
-        public Series(int id_series, string seriesName, byte[] picture, string description, List<Genre> genres, int numberOfSeasons, int averageRating)
+        public Series(int id_series, string seriesName, byte[] picture, string description, List<Genre> genres, int numberOfSeasons)
         {
             Id_series = id_series;
             SeriesName = seriesName;
@@ -13,7 +13,6 @@ namespace Seriendatenbank.data
             Description = description;
             Genres = genres;
             NumberOfSeasons = numberOfSeasons;
-            AverageRating = averageRating;
         }
 
         public int Id_series
@@ -32,9 +31,6 @@ namespace Seriendatenbank.data
         { get; private set; }
 
         public int NumberOfSeasons
-        { get; private set; }
-
-        public int AverageRating
         { get; private set; }
     }
 }

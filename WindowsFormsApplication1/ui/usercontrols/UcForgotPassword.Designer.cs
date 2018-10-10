@@ -42,10 +42,10 @@
             // 
             // btn_abbrechen
             // 
-            this.btn_abbrechen.Location = new System.Drawing.Point(235, 255);
+            this.btn_abbrechen.Location = new System.Drawing.Point(235, 226);
             this.btn_abbrechen.Name = "btn_abbrechen";
             this.btn_abbrechen.Size = new System.Drawing.Size(75, 23);
-            this.btn_abbrechen.TabIndex = 15;
+            this.btn_abbrechen.TabIndex = 5;
             this.btn_abbrechen.Text = "Abbrechen";
             this.btn_abbrechen.UseVisualStyleBackColor = true;
             this.btn_abbrechen.Click += new System.EventHandler(this.btn_abbrechen_Click);
@@ -55,7 +55,7 @@
             this.btn_registrieren.Location = new System.Drawing.Point(235, 197);
             this.btn_registrieren.Name = "btn_registrieren";
             this.btn_registrieren.Size = new System.Drawing.Size(75, 23);
-            this.btn_registrieren.TabIndex = 14;
+            this.btn_registrieren.TabIndex = 4;
             this.btn_registrieren.Text = "Ändern";
             this.btn_registrieren.UseVisualStyleBackColor = true;
             this.btn_registrieren.Click += new System.EventHandler(this.btn_registrieren_Click);
@@ -81,7 +81,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(125, 49);
+            this.label1.Location = new System.Drawing.Point(232, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 13);
             this.label1.TabIndex = 11;
@@ -93,7 +93,7 @@
             this.txt_password_new2.Name = "txt_password_new2";
             this.txt_password_new2.PasswordChar = '*';
             this.txt_password_new2.Size = new System.Drawing.Size(100, 20);
-            this.txt_password_new2.TabIndex = 10;
+            this.txt_password_new2.TabIndex = 3;
             // 
             // txt_password_new
             // 
@@ -101,19 +101,19 @@
             this.txt_password_new.Name = "txt_password_new";
             this.txt_password_new.PasswordChar = '*';
             this.txt_password_new.Size = new System.Drawing.Size(100, 20);
-            this.txt_password_new.TabIndex = 9;
+            this.txt_password_new.TabIndex = 2;
             // 
             // txt_username
             // 
-            this.txt_username.Location = new System.Drawing.Point(128, 65);
+            this.txt_username.Location = new System.Drawing.Point(235, 28);
             this.txt_username.Name = "txt_username";
             this.txt_username.Size = new System.Drawing.Size(100, 20);
-            this.txt_username.TabIndex = 8;
+            this.txt_username.TabIndex = 0;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(232, 49);
+            this.label4.Location = new System.Drawing.Point(232, 51);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(84, 13);
             this.label4.TabIndex = 17;
@@ -121,11 +121,11 @@
             // 
             // txt_password_current
             // 
-            this.txt_password_current.Location = new System.Drawing.Point(235, 65);
+            this.txt_password_current.Location = new System.Drawing.Point(235, 67);
             this.txt_password_current.Name = "txt_password_current";
             this.txt_password_current.PasswordChar = '*';
             this.txt_password_current.Size = new System.Drawing.Size(100, 20);
-            this.txt_password_current.TabIndex = 16;
+            this.txt_password_current.TabIndex = 1;
             // 
             // UcForgotPassword
             // 
