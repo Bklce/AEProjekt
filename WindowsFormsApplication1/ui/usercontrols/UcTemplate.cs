@@ -35,7 +35,7 @@ namespace Seriendatenbank.ui.userControls
 
         protected void Notify(Template src, Template dst)
         {
-            observers.ForEach(e => e.Update(src, dst));
+            //observers.ForEach(e => e.Update(src, dst));
         }
 
         public static void SetUser(User user)

@@ -49,7 +49,7 @@
             this.lbl_series_name.Name = "lbl_series_name";
             this.lbl_series_name.Size = new System.Drawing.Size(171, 40);
             this.lbl_series_name.TabIndex = 2;
-            this.lbl_series_name.Text = "a";
+            this.lbl_series_name.Text = "name";
             // 
             // lbl_points
             // 

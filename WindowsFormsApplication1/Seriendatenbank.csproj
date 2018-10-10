@@ -80,6 +80,7 @@
     <Compile Include="ui\SeriesElement.Designer.cs">
       <DependentUpon>SeriesElement.cs</DependentUpon>
     </Compile>
+    <Compile Include="ui\UcEvent.cs" />
     <Compile Include="ui\usercontrols\UcAddSeries.cs">
       <SubType>UserControl</SubType>
     </Compile>
