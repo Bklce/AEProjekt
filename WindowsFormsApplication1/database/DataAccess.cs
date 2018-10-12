@@ -17,7 +17,7 @@ namespace Seriendatenbank.database
         private const string GET_GENRES = "SELECT * FROM genre";
         private const string ADD_RATING = "INSERT INTO bewertung (id_serie, id_benutzer, favorit, vorgemerkt, gesehen, rating) VALUES (@IdSerie, @IdBenutzer, @Favorit, @Vorgemerkt, @Gesehen, @Rating)";
         private const string GET_RATING = "SELECT rating FROM bewertung WHERE id_serie = @IdSerie AND id_benuter = @IdBenutzer";
-        private const string GET_ALL_RATINGS = "SELECT rating from bewertung WHERE id_benutzer = @IdBenutzer";
+        private const string GET_ALL_RATINGS = "SELECT * FROM bewertung WHERE id_benutzer = @IdBenutzer";
         private const string UPDATE_RATING_FAVORITE = "UPDATE bewertung SET favorit = @Favorit WHERE id_serie = @IdSerie, id_benutzer = @IdBenutzer";
         private const string UPDATE_RATING_MARKED = "UPDATE bewertung SET vorgemerkt = @Vorgemerkt WHERE id_serie = @IdSerie, id_benutzer = @IdBenutzer";
         private const string UPDATE_RATING_SEEN = "UPDATE bewertung SET gesehen = @Gesehen WHERE id_serie = @IdSerie, id_benutzer = @IdBenutzer";
@@ -250,12 +250,12 @@ namespace Seriendatenbank.database
                 Dictionary<int,Rating> all_ratings = new Dictionary<int,Rating>();
 //        private Rating(int id_series, int id_user, bool favorite, bool marked, bool seen, int rating)
 
-                if (reader.Read())
+                while (reader.Read())
                 {
-                    int serien_id = (int)reader["id_series"];
-                    all_ratings.Add(serien_id, new Rating(serien_id, id_user, (bool)reader["favorite"], (bool)reader["marked"], (bool)reader["seen"], (int)reader["rating"]));
+                    int serien_id = Int32.Parse(reader["id_serie"].ToString());
+                    all_ratings.Add(serien_id, new Rating(serien_id, id_user, (bool)reader["favorit"], (bool)reader["vorgemerkt"], (bool)reader["gesehen"], Int32.Parse(reader["rating"].ToString())));
                 }
-                return null;
+                return all_ratings;
             }
             catch (Exception e)
             {
@@ -328,7 +328,7 @@ namespace Seriendatenbank.database
             return false;
         }
 
-        public List<Series> GetSeries()
+        public Dictionary<int, Series> GetSeries()
         {
             connection.Open();
             try
@@ -336,10 +336,12 @@ namespace Seriendatenbank.database
                 OleDbCommand command = new OleDbCommand(GET_ALL_SERIES, connection);
 
                 OleDbDataReader reader = command.ExecuteReader();
-                List<Series> series = new List<Series>();
+                Dictionary<int, Series> series = new Dictionary<int, Series>();
                 while (reader.Read())
                 {
-                    series.Add(new Series(Int32.Parse(reader["id_serie"].ToString()), reader["serienname"].ToString(), (byte[])reader["bild"], reader["beschreibung"].ToString(), new List<Genre>
+                    int idSeries = Int32.Parse(reader["id_serie"].ToString());
+
+                    series.Add(idSeries, new Series(idSeries, reader["serienname"].ToString(), (byte[])reader["bild"], reader["beschreibung"].ToString(), new List<Genre>
                         (), -1));
                 }
 

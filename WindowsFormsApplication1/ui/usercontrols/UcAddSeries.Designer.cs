@@ -40,6 +40,7 @@
             this.txt_count_seasons = new System.Windows.Forms.TextBox();
             this.btn_accept = new System.Windows.Forms.Button();
             this.txt_filename = new System.Windows.Forms.TextBox();
+            this.btn_cancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // opd_file_picker
@@ -124,7 +125,7 @@
             // 
             // btn_accept
             // 
-            this.btn_accept.Location = new System.Drawing.Point(266, 282);
+            this.btn_accept.Location = new System.Drawing.Point(237, 284);
             this.btn_accept.Name = "btn_accept";
             this.btn_accept.Size = new System.Drawing.Size(118, 23);
             this.btn_accept.TabIndex = 10;
@@ -140,10 +141,21 @@
             this.txt_filename.Size = new System.Drawing.Size(231, 20);
             this.txt_filename.TabIndex = 11;
             // 
+            // btn_cancel
+            // 
+            this.btn_cancel.Location = new System.Drawing.Point(27, 284);
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.Size = new System.Drawing.Size(118, 23);
+            this.btn_cancel.TabIndex = 12;
+            this.btn_cancel.Text = "Abbrechen";
+            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            // 
             // UcAddSeries
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.txt_filename);
             this.Controls.Add(this.btn_accept);
             this.Controls.Add(this.txt_count_seasons);
@@ -176,5 +188,6 @@
         private System.Windows.Forms.TextBox txt_count_seasons;
         private System.Windows.Forms.Button btn_accept;
         private System.Windows.Forms.TextBox txt_filename;
+        private System.Windows.Forms.Button btn_cancel;
     }
 }

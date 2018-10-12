@@ -64,10 +64,18 @@ namespace WindowsFormsApplication1.ui.usercontrols
             else
             {
                 if (dataAccess.AddSeries(txt_series_name.Text, picture, txt_description.Text, null, Int32.Parse(txt_count_seasons.Text)))
+                {
                     MessageBox.Show("Erfolg");
+                    Notify(this, UcSeries.Instance);
+                }
                 else
                     MessageBox.Show("Fehler");
             }
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            Notify(this, UcSeries.Instance);
         }
     }
 }
