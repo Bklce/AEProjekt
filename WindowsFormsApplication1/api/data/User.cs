@@ -1,4 +1,5 @@
 ﻿using Seriendatenbank.util;
+using System.Collections.Generic;
 
 namespace Seriendatenbank.data
 {
@@ -21,6 +22,9 @@ namespace Seriendatenbank.data
         { get; set; }
 
         public Hash Hash
+        { get; set; }
+        
+        public Dictionary<int, Rating> Ratings
         { get; set; }
     }
 }

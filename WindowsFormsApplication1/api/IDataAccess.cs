@@ -12,11 +12,10 @@ namespace Seriendatenbank.api
         bool UpdateUserUsername(string username, string usernameNew);
         bool AddGenre(string genre);
         List<Genre> GetGenres();
-        bool AddRating(int id_series, int id_user, int ratingValue);
         Rating GetRating(int id_series, int id_user);
-        bool UpdateRating(int id_series, int id_user, int ratingValue);
+        bool UpdateOrAddRating(Rating rating);
         int GetAverageRatingForSeries(int seriesId);
         bool AddSeries(string seriesName, byte[] picture, string description, List<Genre> genres, int numberOfSeasons);
-        Dictionary<int, Series> GetSeries();
+        List<Series> GetSeries();
     }
 }

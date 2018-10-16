@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Seriendatenbank.ui.userControls;
 using WindowsFormsApplication1.ui.usercontrols;
+using WindowsFormsApplication1.ui.events;
+using Seriendatenbank.data;
 
 namespace Seriendatenbank
 {
@@ -23,16 +25,17 @@ namespace Seriendatenbank
         }
 
         //Updaten des angezeigten UserControls, wegräumen des alten
-        public void Update(Template src, Template dst)
+        public void Update(Template src, EventData e)
         {
             var direct = new Dictionary<Type, Action> {
                 { typeof(UcLogin), () => BringElementToFront(UcLogin.Instance)},
                 { typeof(UcRegister), () => BringElementToFront(UcRegister.Instance)},
                 { typeof(UcForgotPassword), () => BringElementToFront(UcForgotPassword.Instance) },
                 { typeof(UcSeries), () => BringElementToFront(UcSeries.Instance) },
+                { typeof(UcSerie), () =>  BringElementToFront(UcSerie.Instance) },
                 { typeof(UcAddSeries), () => BringElementToFront(UcAddSeries.Instance) },
             }; 
-            @direct[dst.GetType()]();
+            @direct[e.Destination.GetType()]();
 
             pnl_root.Controls.Remove(src);
 
@@ -41,6 +44,7 @@ namespace Seriendatenbank
                 { typeof(UcRegister), () =>  UcRegister.Reset()},
                 { typeof(UcForgotPassword), () =>  UcForgotPassword.Reset()},
                 { typeof(UcSeries), () =>  UcSeries.Reset()},
+                { typeof(UcSerie), () =>  UcSerie.Reset()},
                 { typeof(UcAddSeries), () =>  UcAddSeries.Reset()},
             };
             @dispose[src.GetType()]();
@@ -53,6 +57,5 @@ namespace Seriendatenbank
             element.Dock = DockStyle.Fill;
             element.BringToFront();
         }
-
     }
 }

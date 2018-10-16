@@ -3,10 +3,11 @@ using System.Windows.Forms;
 using Seriendatenbank.data;
 using Seriendatenbank.util;
 using WindowsFormsApplication1.ui.usercontrols;
+using WindowsFormsApplication1.ui.events;
 
 namespace Seriendatenbank.ui.userControls
 {
-    public partial class UcLogin : Template, IDisposable
+    public partial class UcLogin : Template
     {
         private static UcLogin instance = null;
 
@@ -23,6 +24,8 @@ namespace Seriendatenbank.ui.userControls
         private UcLogin()
         {
             InitializeComponent();
+            pnl_content.Left = (pnl_content.Parent.Width - pnl_content.Width) / 2;
+            pnl_content.Top = (pnl_content.Parent.Height - pnl_content.Height) / 2;
         }
 
         private void btn_login_Click(object sender, EventArgs e)
@@ -33,11 +36,11 @@ namespace Seriendatenbank.ui.userControls
                 MessageBox.Show("Passwort darf nicht leer sein");
             else
             {
-                User user = dataAccess.GetUser(txt_username.Text);
+                User user = dataAccess.GetUserWithRating(txt_username.Text);
                 if (user != null && new Hash(txt_password.Text, user.Hash.Salt).Equals(user.Hash))
                 {
                     currentUser = user;
-                    Notify(this, UcSeries.Instance);
+                    Notify(this, new EventData(UcSeries.Instance));
                 }
                 else
                     MessageBox.Show("Benutzername oder Passwort scheinen falsch");
@@ -46,12 +49,12 @@ namespace Seriendatenbank.ui.userControls
 
         private void btn_forgot_password_Click(object sender, EventArgs e)
         {
-            Notify(this, UcForgotPassword.Instance);
+        	Notify(this,  new EventData(UcForgotPassword.Instance));
         }
 
         private void btn_register_Click(object sender, EventArgs e)
         {
-            Notify(this, UcRegister.Instance);
+        	Notify(this, new EventData(UcRegister.Instance));
         }
 
         public static void Reset()

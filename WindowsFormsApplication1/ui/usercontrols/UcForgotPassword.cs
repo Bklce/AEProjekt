@@ -2,6 +2,7 @@
 using Seriendatenbank.util;
 using System;
 using System.Windows.Forms;
+using WindowsFormsApplication1.ui.events;
 
 namespace Seriendatenbank.ui.userControls
 {
@@ -22,6 +23,8 @@ namespace Seriendatenbank.ui.userControls
         private UcForgotPassword()
         {
             InitializeComponent();
+            pnl_content.Left = (pnl_content.Parent.Width - pnl_content.Width) / 2;
+            pnl_content.Top = (pnl_content.Parent.Height - pnl_content.Height) / 2;
         }
 
         public static void Reset()
@@ -31,7 +34,7 @@ namespace Seriendatenbank.ui.userControls
 
         private void btn_abbrechen_Click(object sender, System.EventArgs e)
         {
-            Notify(this, UcLogin.Instance);
+        	Notify(this, new EventData(UcLogin.Instance, null));
         }
 
         private void btn_registrieren_Click(object sender, System.EventArgs e)
@@ -54,7 +57,7 @@ namespace Seriendatenbank.ui.userControls
                     if (dataAccess.UpdateUserPassword(txt_username.Text, txt_password_new.Text))
                     {
                         MessageBox.Show("Passwort wurde geändert.");
-                        Notify(this, UcLogin.Instance);
+                        Notify(this, new EventData(UcLogin.Instance));
                     }
                     else
                         MessageBox.Show("Das Passwort konnte nicht geändert werde, möglicherweise existiert der angegebene Benutzer nicht oder das eingegebene Passwort ist falsch.");

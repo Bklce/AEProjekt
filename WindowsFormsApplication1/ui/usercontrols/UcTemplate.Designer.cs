@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // Template
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "Template";
-            this.Size = new System.Drawing.Size(772, 438);
-            this.ResumeLayout(false);
+        	this.SuspendLayout();
+        	// 
+        	// Template
+        	// 
+        	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+        	this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        	this.Name = "Template";
+        	this.Size = new System.Drawing.Size(951, 515);
+        	this.ResumeLayout(false);
 
         }
 

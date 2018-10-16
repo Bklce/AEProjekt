@@ -1,9 +1,8 @@
-﻿using Seriendatenbank.data;
-using Seriendatenbank.ui.userControls;
+﻿using Seriendatenbank.ui.userControls;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using WindowsFormsApplication1.ui.events;
 
 namespace WindowsFormsApplication1.ui.usercontrols
 {
@@ -22,9 +21,11 @@ namespace WindowsFormsApplication1.ui.usercontrols
             }
         }
 
-        public UcAddSeries()
+        private UcAddSeries()
         {
             InitializeComponent();
+            pnl_content.Left = (pnl_content.Parent.Width - pnl_content.Width) / 2;
+            pnl_content.Top = (pnl_content.Parent.Height - pnl_content.Height) / 2;
         }
 
         public static void Reset()
@@ -66,7 +67,7 @@ namespace WindowsFormsApplication1.ui.usercontrols
                 if (dataAccess.AddSeries(txt_series_name.Text, picture, txt_description.Text, null, Int32.Parse(txt_count_seasons.Text)))
                 {
                     MessageBox.Show("Erfolg");
-                    Notify(this, UcSeries.Instance);
+                    Notify(this, new EventData(UcSeries.Instance));
                 }
                 else
                     MessageBox.Show("Fehler");
@@ -75,7 +76,7 @@ namespace WindowsFormsApplication1.ui.usercontrols
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            Notify(this, UcSeries.Instance);
+        	Notify(this, new EventData(UcSeries.Instance));
         }
     }
 }

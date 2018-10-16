@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Seriendatenbank.data;
 using Seriendatenbank.database;
+using WindowsFormsApplication1.ui.events;
 
 namespace Seriendatenbank.ui.userControls
 {
@@ -11,7 +12,7 @@ namespace Seriendatenbank.ui.userControls
         protected static User currentUser;
         private static List<MainWindow> observers = new List<MainWindow>();
 
-        public Template(){
+        protected Template(){
             this.Height = 515;
             this.Width = 951;
         }                        
@@ -33,9 +34,9 @@ namespace Seriendatenbank.ui.userControls
             observers.Add(observer);
         }
 
-        protected void Notify(Template src, Template dst)
+        protected void Notify(Template src, EventData e)
         {
-            observers.ForEach(e => e.Update(src, dst));
+            observers.ForEach(o => o.Update(src, e));
         }
 
         public static void SetUser(User user)

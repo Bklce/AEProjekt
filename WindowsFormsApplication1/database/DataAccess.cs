@@ -29,7 +29,7 @@ namespace Seriendatenbank.database
         private const string GET_ALL_SERIES = "SELECT * FROM serie";
 
         private static DataAccess instance;
-        private OleDbConnection connection;
+        private readonly OleDbConnection connection;
 
         private DataAccess()
         {
@@ -49,10 +49,10 @@ namespace Seriendatenbank.database
             connection.Open();
             try
             {
-                OleDbCommand command = new OleDbCommand(ADD_USER, connection);
+                var command = new OleDbCommand(ADD_USER, connection);
                 command.Parameters.Add("@Benutzername", OleDbType.VarWChar, username.Length).Value = username;
 
-                Hash hash = new Hash(password);
+                var hash = new Hash(password);
                 byte[] hashedPassword = hash.HashValue;
                 command.Parameters.Add("@Hash", OleDbType.Binary, hashedPassword.Length).Value = hashedPassword;
                 byte[] salt = hash.Salt;
@@ -78,7 +78,7 @@ namespace Seriendatenbank.database
             connection.Open();
             try
             {
-                OleDbCommand command = new OleDbCommand(GET_USER, connection);
+                var command = new OleDbCommand(GET_USER, connection);
                 command.Parameters.Add("@Benutzername", OleDbType.VarWChar, username.Length).Value = username;
 
                 OleDbDataReader reader = command.ExecuteReader();
@@ -96,6 +96,20 @@ namespace Seriendatenbank.database
 
             return null;
         }
+        
+        public User GetUserWithRating(string username){
+        	User user = GetUser(username);
+        	if(user != null)
+        	{
+        		Dictionary<int, Rating> ratings = GetAllRatings(user.Id);
+        		if(ratings != null)
+        			user.Ratings = ratings;
+        		
+        		return user;
+        	}
+        		
+        	return null;
+        }
 
         public bool UpdateUserPassword(string username, string password)
         {
@@ -103,9 +117,9 @@ namespace Seriendatenbank.database
             try
             {
                 //TODO mit addUser zusammenführen
-                OleDbCommand command = new OleDbCommand(UPDATE_USER_PASSWORD, connection);
+                var command = new OleDbCommand(UPDATE_USER_PASSWORD, connection);
                 
-                Hash hash = new Hash(password);
+                var hash = new Hash(password);
                 command.Parameters.Add("@Salt", OleDbType.Binary, hash.Salt.Length).Value = hash.Salt;
                 command.Parameters.Add("@Hash", OleDbType.Binary, hash.HashValue.Length).Value = hash.HashValue;
                
@@ -113,7 +127,6 @@ namespace Seriendatenbank.database
 
                 if (command.ExecuteNonQuery() > 0)
                     return true;
-
                 return false;
             }
             catch (Exception e)
@@ -131,7 +144,7 @@ namespace Seriendatenbank.database
             connection.Open();
             try
             {
-                OleDbCommand command = new OleDbCommand(UPDATE_USER_USERNAME, connection);
+                var command = new OleDbCommand(UPDATE_USER_USERNAME, connection);
                 command.Parameters.Add("@Benutzername", OleDbType.VarWChar, username.Length).Value = username;
                 command.Parameters.Add("@BenutzernameNeu", OleDbType.Integer, usernameNew.Length).Value = usernameNew;
 
@@ -155,7 +168,7 @@ namespace Seriendatenbank.database
             connection.Open();
             try
             {
-                OleDbCommand command = new OleDbCommand(ADD_GENRE, connection);
+                var command = new OleDbCommand(ADD_GENRE, connection);
 
                 command.Parameters.Add("@Bezeichnung", OleDbType.VarWChar, genre.Length).Value = genre;
                 
@@ -180,13 +193,13 @@ namespace Seriendatenbank.database
             connection.Open();
             try
             {
-                OleDbCommand command = new OleDbCommand(GET_GENRES, connection);
+                var command = new OleDbCommand(GET_GENRES, connection);
 
                 OleDbDataReader reader = command.ExecuteReader();
-                List<Genre> genres = new List<Genre>();
+                var genres = new List<Genre>();
                 while (reader.Read())
                 {
-                    genres.Add(new Genre(Int32.Parse(reader["id_genre"].ToString()), reader["beschreigung"].ToString()));
+                    genres.Add(new Genre(Int32.Parse(reader["id_genre"].ToString()), reader["beschreibung"].ToString()));
                 }
 
                 if (genres.Count > 0)
@@ -203,12 +216,24 @@ namespace Seriendatenbank.database
             return null;
         }
 
-        public bool AddRating(int id_series, int id_user, int ratingValue)
+        protected bool AddRating(Rating rating)
         {
             connection.Open();
             try
             {
-                throw new NotImplementedException();
+                var command = new OleDbCommand(ADD_RATING, connection);
+                
+                command.Parameters.AddWithValue("@IdSerie", rating.Id_series);
+                command.Parameters.AddWithValue("@IdBenutzer", rating.Id_user);
+                command.Parameters.AddWithValue("@Favorit", rating.Favorite);
+                command.Parameters.AddWithValue("@Markiert", rating.Marked);
+                command.Parameters.AddWithValue("@Gesehen", rating.Marked);
+                command.Parameters.AddWithValue("@Rating", rating.Seen);
+                
+                if (command.ExecuteNonQuery() > 0)
+                    return true;
+
+                return false;
             }
             catch (Exception e)
             {
@@ -225,7 +250,16 @@ namespace Seriendatenbank.database
             connection.Open();
             try
             {
-                throw new NotImplementedException();
+                var command = new OleDbCommand(GET_RATING, connection);
+                command.Parameters.Add("@IdSerie", OleDbType.VarWChar).Value = id_user;
+                command.Parameters.Add("@IdBenutzer", OleDbType.VarWChar).Value = id_user;
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                	return new Rating(id_series, id_user, (bool)reader["favorit"], (bool)reader["vorgemerkt"], (bool)reader["gesehen"], Int32.Parse(reader["rating"].ToString()));
+                
+                return null;
             }
             catch (Exception e)
             {
@@ -242,14 +276,12 @@ namespace Seriendatenbank.database
             connection.Open();
             try
             {
-                OleDbCommand command = new OleDbCommand(GET_ALL_RATINGS, connection);
+                var command = new OleDbCommand(GET_ALL_RATINGS, connection);
                 command.Parameters.Add("@IdBenutzer", OleDbType.VarWChar).Value = id_user;
 
                 OleDbDataReader reader = command.ExecuteReader();
 
-                Dictionary<int,Rating> all_ratings = new Dictionary<int,Rating>();
-//        private Rating(int id_series, int id_user, bool favorite, bool marked, bool seen, int rating)
-
+                var all_ratings = new Dictionary<int,Rating>();
                 while (reader.Read())
                 {
                     int serien_id = Int32.Parse(reader["id_serie"].ToString());
@@ -267,12 +299,32 @@ namespace Seriendatenbank.database
             return null;
         }
         
-        public bool UpdateRating(int id_series, int id_user, int ratingValue)
+        public bool UpdateOrAddRating(Rating rating){
+        	Rating existingRating = GetRating(rating.Id_series, rating.Id_user);
+        	if(existingRating != null)
+        		return UpdateRating(rating);
+        	else
+        		return AddRating(rating);
+        }
+        
+        protected bool UpdateRating(Rating rating)
         {
             connection.Open();
             try
             {
-                throw new NotImplementedException();
+                var command = new OleDbCommand(UPDATE_RATING_RATING, connection);
+                
+                command.Parameters.AddWithValue("@IdSerie", rating.Id_series);
+                command.Parameters.AddWithValue("@IdBenutzer", rating.Id_user);
+                command.Parameters.AddWithValue("@Favorit", rating.Favorite);
+                command.Parameters.AddWithValue("@Markiert", rating.Marked);
+                command.Parameters.AddWithValue("@Gesehen", rating.Marked);
+                command.Parameters.AddWithValue("@Rating", rating.Seen);
+                
+                if (command.ExecuteNonQuery() > 0)
+                    return true;
+
+                return false;
             }
             catch (Exception e)
             {
@@ -280,7 +332,6 @@ namespace Seriendatenbank.database
             }
             finally
             { connection.Close(); }
-
             return false;
         }
 
@@ -306,7 +357,7 @@ namespace Seriendatenbank.database
             connection.Open();
             try
             {
-                OleDbCommand command = new OleDbCommand(ADD_SERIES, connection);
+                var command = new OleDbCommand(ADD_SERIES, connection);
                 command.Parameters.Add("@Serienname", OleDbType.VarWChar, seriesName.Length).Value = seriesName;
                 command.Parameters.Add("@Beschreibung", OleDbType.VarWChar, description.Length).Value = description;
                 command.Parameters.Add("@Bild", OleDbType.Binary, picture.Length).Value = picture;
@@ -328,20 +379,18 @@ namespace Seriendatenbank.database
             return false;
         }
 
-        public Dictionary<int, Series> GetSeries()
+        public List<Series> GetSeries()
         {
             connection.Open();
             try
             {
-                OleDbCommand command = new OleDbCommand(GET_ALL_SERIES, connection);
+                var command = new OleDbCommand(GET_ALL_SERIES, connection);
 
                 OleDbDataReader reader = command.ExecuteReader();
-                Dictionary<int, Series> series = new Dictionary<int, Series>();
+                var series = new List<Series>();
                 while (reader.Read())
                 {
-                    int idSeries = Int32.Parse(reader["id_serie"].ToString());
-
-                    series.Add(idSeries, new Series(idSeries, reader["serienname"].ToString(), (byte[])reader["bild"], reader["beschreibung"].ToString(), new List<Genre>
+                    series.Add(new Series(Int32.Parse(reader["id_serie"].ToString()), reader["serienname"].ToString(), (byte[])reader["bild"], reader["beschreibung"].ToString(), new List<Genre>
                         (), -1));
                 }
 

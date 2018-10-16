@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using WindowsFormsApplication1.ui.events;
+
 namespace Seriendatenbank.ui.userControls
 {
     public partial class UcRegister : Template
@@ -19,6 +21,8 @@ namespace Seriendatenbank.ui.userControls
         private UcRegister()
         {
             InitializeComponent();
+            pnl_content.Left = (pnl_content.Parent.Width - pnl_content.Width) / 2;
+            pnl_content.Top = (pnl_content.Parent.Height - pnl_content.Height) / 2;
         }
 
         private void btn_registrieren_Click(object sender, System.EventArgs e)
@@ -45,7 +49,7 @@ namespace Seriendatenbank.ui.userControls
 
         private void btn_abbrechen_Click(object sender, EventArgs e)
         {
-            Notify(this, UcLogin.Instance);
+        	Notify(this, new EventData(UcLogin.Instance));
         }
 
         public static void Reset()
