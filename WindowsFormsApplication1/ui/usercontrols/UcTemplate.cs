@@ -43,5 +43,10 @@ namespace Seriendatenbank.ui.userControls
         {
             currentUser = user;
         }
+        
+        protected void CenterByPanel(Panel panel){
+        	panel.Left = (panel.Parent.Width - panel.Width) / 2;
+            panel.Top = (panel.Parent.Height - panel.Height) / 2;
+        }
     }
 }

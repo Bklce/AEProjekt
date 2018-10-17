@@ -28,28 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-        	this.btn_add_series = new System.Windows.Forms.Button();
         	this.tlPanel = new System.Windows.Forms.TableLayoutPanel();
         	this.panel1 = new System.Windows.Forms.Panel();
         	this.panel2 = new System.Windows.Forms.Panel();
-        	this.button3 = new System.Windows.Forms.Button();
-        	this.button2 = new System.Windows.Forms.Button();
-        	this.button1 = new System.Windows.Forms.Button();
+        	this.btn_seen = new System.Windows.Forms.Button();
+        	this.btn_home = new System.Windows.Forms.Button();
+        	this.btn_logout = new System.Windows.Forms.Button();
+        	this.btn_marked = new System.Windows.Forms.Button();
+        	this.btn_favorites = new System.Windows.Forms.Button();
         	this.pnl_content = new System.Windows.Forms.Panel();
         	this.panel1.SuspendLayout();
         	this.panel2.SuspendLayout();
         	this.pnl_content.SuspendLayout();
         	this.SuspendLayout();
-        	// 
-        	// btn_add_series
-        	// 
-        	this.btn_add_series.Location = new System.Drawing.Point(872, 480);
-        	this.btn_add_series.Name = "btn_add_series";
-        	this.btn_add_series.Size = new System.Drawing.Size(70, 29);
-        	this.btn_add_series.TabIndex = 1;
-        	this.btn_add_series.Text = "Hinzufügen";
-        	this.btn_add_series.UseVisualStyleBackColor = true;
-        	this.btn_add_series.Click += new System.EventHandler(this.Btn_add_series_Click);
         	// 
         	// tlPanel
         	// 
@@ -78,52 +69,73 @@
         	// 
         	// panel2
         	// 
-        	this.panel2.Controls.Add(this.button3);
-        	this.panel2.Controls.Add(this.button2);
-        	this.panel2.Controls.Add(this.button1);
+        	this.panel2.Controls.Add(this.btn_seen);
+        	this.panel2.Controls.Add(this.btn_home);
+        	this.panel2.Controls.Add(this.btn_logout);
+        	this.panel2.Controls.Add(this.btn_marked);
+        	this.panel2.Controls.Add(this.btn_favorites);
         	this.panel2.Location = new System.Drawing.Point(39, 37);
         	this.panel2.Name = "panel2";
         	this.panel2.Size = new System.Drawing.Size(758, 40);
         	this.panel2.TabIndex = 3;
         	// 
-        	// button3
+        	// btn_seen
         	// 
-        	this.button3.Location = new System.Drawing.Point(671, 11);
-        	this.button3.Name = "button3";
-        	this.button3.Size = new System.Drawing.Size(75, 23);
-        	this.button3.TabIndex = 2;
-        	this.button3.Text = "Ausloggen";
-        	this.button3.UseVisualStyleBackColor = true;
-        	this.button3.Click += new System.EventHandler(this.Button3_Click);
+        	this.btn_seen.Location = new System.Drawing.Point(324, 11);
+        	this.btn_seen.Name = "btn_seen";
+        	this.btn_seen.Size = new System.Drawing.Size(75, 23);
+        	this.btn_seen.TabIndex = 3;
+        	this.btn_seen.Text = "Gesehen";
+        	this.btn_seen.UseVisualStyleBackColor = true;
+        	this.btn_seen.Click += new System.EventHandler(this.Btn_seenClick);
         	// 
-        	// button2
+        	// btn_home
         	// 
-        	this.button2.Location = new System.Drawing.Point(100, 11);
-        	this.button2.Name = "button2";
-        	this.button2.Size = new System.Drawing.Size(75, 23);
-        	this.button2.TabIndex = 1;
-        	this.button2.Text = "Vermerkt";
-        	this.button2.UseVisualStyleBackColor = true;
-        	this.button2.Click += new System.EventHandler(this.button2_Click);
+        	this.btn_home.Location = new System.Drawing.Point(8, 11);
+        	this.btn_home.Name = "btn_home";
+        	this.btn_home.Size = new System.Drawing.Size(75, 23);
+        	this.btn_home.TabIndex = 0;
+        	this.btn_home.Text = "Home";
+        	this.btn_home.UseVisualStyleBackColor = true;
+        	this.btn_home.Click += new System.EventHandler(this.Btn_homeClick);
         	// 
-        	// button1
+        	// btn_logout
         	// 
-        	this.button1.Location = new System.Drawing.Point(6, 11);
-        	this.button1.Name = "button1";
-        	this.button1.Size = new System.Drawing.Size(75, 23);
-        	this.button1.TabIndex = 0;
-        	this.button1.Text = "Favoriten";
-        	this.button1.UseVisualStyleBackColor = true;
-        	this.button1.Click += new System.EventHandler(this.Button1_Click);
+        	this.btn_logout.Location = new System.Drawing.Point(671, 11);
+        	this.btn_logout.Name = "btn_logout";
+        	this.btn_logout.Size = new System.Drawing.Size(75, 23);
+        	this.btn_logout.TabIndex = 4;
+        	this.btn_logout.Text = "Ausloggen";
+        	this.btn_logout.UseVisualStyleBackColor = true;
+        	this.btn_logout.Click += new System.EventHandler(this.Btn_logoutClick);
+        	// 
+        	// btn_marked
+        	// 
+        	this.btn_marked.Location = new System.Drawing.Point(232, 11);
+        	this.btn_marked.Name = "btn_marked";
+        	this.btn_marked.Size = new System.Drawing.Size(75, 23);
+        	this.btn_marked.TabIndex = 2;
+        	this.btn_marked.Text = "Vermerkt";
+        	this.btn_marked.UseVisualStyleBackColor = true;
+        	this.btn_marked.Click += new System.EventHandler(this.Btn_markedClick);
+        	// 
+        	// btn_favorites
+        	// 
+        	this.btn_favorites.Location = new System.Drawing.Point(141, 11);
+        	this.btn_favorites.Name = "btn_favorites";
+        	this.btn_favorites.Size = new System.Drawing.Size(75, 23);
+        	this.btn_favorites.TabIndex = 1;
+        	this.btn_favorites.Text = "Favoriten";
+        	this.btn_favorites.UseVisualStyleBackColor = true;
+        	this.btn_favorites.Click += new System.EventHandler(this.Btn_favoritesClick);
         	// 
         	// pnl_content
         	// 
         	this.pnl_content.Controls.Add(this.panel2);
-        	this.pnl_content.Controls.Add(this.btn_add_series);
         	this.pnl_content.Controls.Add(this.panel1);
-        	this.pnl_content.Location = new System.Drawing.Point(6, 3);
+        	this.pnl_content.Location = new System.Drawing.Point(51, 3);
         	this.pnl_content.Name = "pnl_content";
-        	this.pnl_content.Size = new System.Drawing.Size(945, 512);
+        	this.pnl_content.Size = new System.Drawing.Size(842, 512);
         	this.pnl_content.TabIndex = 4;
         	// 
         	// UcSeries
@@ -141,13 +153,14 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btn_add_series;
         private System.Windows.Forms.TableLayoutPanel tlPanel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_logout;
+        private System.Windows.Forms.Button btn_marked;
+        private System.Windows.Forms.Button btn_favorites;
         private System.Windows.Forms.Panel pnl_content;
+        private System.Windows.Forms.Button btn_home;
+        private System.Windows.Forms.Button btn_seen;
     }
 }

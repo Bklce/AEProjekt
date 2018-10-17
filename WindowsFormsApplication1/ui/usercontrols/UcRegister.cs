@@ -17,12 +17,16 @@ namespace Seriendatenbank.ui.userControls
                 return instance;
             }
         }
+        
+        public static void Reset()
+        {
+            instance = null;
+        }
 
         private UcRegister()
         {
             InitializeComponent();
-            pnl_content.Left = (pnl_content.Parent.Width - pnl_content.Width) / 2;
-            pnl_content.Top = (pnl_content.Parent.Height - pnl_content.Height) / 2;
+            CenterByPanel(pnl_content);
         }
 
         private void btn_registrieren_Click(object sender, System.EventArgs e)
@@ -52,9 +56,9 @@ namespace Seriendatenbank.ui.userControls
         	Notify(this, new EventData(UcLogin.Instance));
         }
 
-        public static void Reset()
-        {
-            instance = null;
-        }
+		private void Btn_backClick(object sender, EventArgs e)
+		{
+			Notify(this, new EventData(UcLogin.Instance));
+		}
     }
 }

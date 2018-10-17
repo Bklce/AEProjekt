@@ -32,5 +32,8 @@ namespace Seriendatenbank.data
 
         public int NumberOfSeasons
         { get; private set; }
+        
+        public int AverageRating
+        { get; set; }
     }
 }

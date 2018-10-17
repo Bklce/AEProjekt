@@ -10,6 +10,8 @@ namespace Seriendatenbank
 {
     public partial class MainWindow : Form
     {
+    	private Template lastVisited;
+    	
         public MainWindow()
         {
             InitializeComponent();
@@ -57,5 +59,24 @@ namespace Seriendatenbank
             element.Dock = DockStyle.Fill;
             element.BringToFront();
         }
+        
+		private void MainWindowKeyDown(object sender, KeyEventArgs e)
+		{
+			switch(e.KeyCode){
+				case Keys.F9:
+					if(lastVisited == null)
+					{
+						lastVisited = (Template)pnl_root.Controls[0];
+						BringElementToFront(UcAdmin.Instance);
+					}
+					else
+					{
+						Template tmp = lastVisited;
+						lastVisited = null;
+						BringElementToFront(tmp);
+					}
+					break;
+			}
+		}
     }
 }

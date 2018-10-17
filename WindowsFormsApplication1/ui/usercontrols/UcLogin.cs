@@ -2,8 +2,8 @@
 using System.Windows.Forms;
 using Seriendatenbank.data;
 using Seriendatenbank.util;
-using WindowsFormsApplication1.ui.usercontrols;
 using WindowsFormsApplication1.ui.events;
+using WindowsFormsApplication1.ui.usercontrols;
 
 namespace Seriendatenbank.ui.userControls
 {
@@ -20,12 +20,16 @@ namespace Seriendatenbank.ui.userControls
                 return instance;
             }
         }
+        
+        public static void Reset()
+        {
+            instance = null;
+        }
 
         private UcLogin()
         {
             InitializeComponent();
-            pnl_content.Left = (pnl_content.Parent.Width - pnl_content.Width) / 2;
-            pnl_content.Top = (pnl_content.Parent.Height - pnl_content.Height) / 2;
+            CenterByPanel(pnl_content);
         }
 
         private void btn_login_Click(object sender, EventArgs e)
@@ -55,11 +59,6 @@ namespace Seriendatenbank.ui.userControls
         private void btn_register_Click(object sender, EventArgs e)
         {
         	Notify(this, new EventData(UcRegister.Instance));
-        }
-
-        public static void Reset()
-        {
-            instance = null;
         }
     }
 }

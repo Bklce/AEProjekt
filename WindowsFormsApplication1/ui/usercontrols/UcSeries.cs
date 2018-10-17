@@ -3,6 +3,7 @@ using Seriendatenbank.ui.userControls;
 using System.Collections.Generic;
 using WindowsFormsApplication1.ui.events;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace WindowsFormsApplication1.ui.usercontrols
 {
@@ -29,10 +30,9 @@ namespace WindowsFormsApplication1.ui.usercontrols
         private UcSeries()
         {
             InitializeComponent();
-            pnl_content.Left = (pnl_content.Parent.Width - pnl_content.Width) / 2;
-            pnl_content.Top = (pnl_content.Parent.Height - pnl_content.Height) / 2;
+            CenterByPanel(pnl_content);
             
-            series = dataAccess.GetSeries();
+            series = dataAccess.GetSeriesWithAverageRatings();
             LoadSeries(series);
         }
 
@@ -69,6 +69,12 @@ namespace WindowsFormsApplication1.ui.usercontrols
                     	case RatingType.MARKED:
             				filteredList = ratings.Where(x => x.Value.Marked).Select(x => x.Value.Id_series).ToList();
                     		break; 
+                    	case RatingType.SEEN:
+            				filteredList = ratings.Where(x => x.Value.Seen).Select(x => x.Value.Id_series).ToList();
+                    		break;
+                    	case RatingType.ALL:
+            				filteredList = series.Select(x => x.Id_series).ToList();
+                    		break;
                 }
             	return series.Where(x => filteredList.Contains(x.Id_series)).ToList();
             }
@@ -77,7 +83,7 @@ namespace WindowsFormsApplication1.ui.usercontrols
         }
         
         private enum RatingType{
-        	FAVORITES, MARKED
+        	ALL, FAVORITES, MARKED, SEEN
         }
         
         private void Btn_add_series_Click(object sender, System.EventArgs e)
@@ -85,13 +91,13 @@ namespace WindowsFormsApplication1.ui.usercontrols
         	Notify(this, new EventData(UcAddSeries.Instance));
         }
 
-        private void Button3_Click(object sender, System.EventArgs e)
+        private void Btn_logoutClick(object sender, System.EventArgs e)
         {
             currentUser = null;
             Notify(this,  new EventData(UcLogin.Instance));
         }
 
-        private void Button1_Click(object sender, System.EventArgs e)
+        private void Btn_favoritesClick(object sender, System.EventArgs e)
         {
             List<Series> favorites = GetListOf(RatingType.FAVORITES);
             if (favorites != null) {
@@ -100,13 +106,31 @@ namespace WindowsFormsApplication1.ui.usercontrols
             }
         }
 
-        private void button2_Click(object sender, System.EventArgs e)
+        private void Btn_markedClick(object sender, System.EventArgs e)
         {
            List<Series> marked = GetListOf(RatingType.MARKED);
-            if (marked != null) {
-            	tlPanel.Controls.Clear();
+           if (marked != null) {
+           		tlPanel.Controls.Clear();
             	LoadSeries(marked);
-            }
+           }
         }
+        
+		private void Btn_seenClick(object sender, System.EventArgs e)
+		{
+			List<Series> seen = GetListOf(RatingType.SEEN);
+           	if (seen != null) {
+           		tlPanel.Controls.Clear();
+            	LoadSeries(seen);
+          	}
+		}
+		
+		private void Btn_homeClick(object sender, System.EventArgs e)
+		{
+			List<Series> all = GetListOf(RatingType.ALL);
+           	if (all != null) {
+           		tlPanel.Controls.Clear();
+            	LoadSeries(all);
+          	}
+		}
     }
 }

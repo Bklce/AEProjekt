@@ -24,8 +24,7 @@ namespace WindowsFormsApplication1.ui.usercontrols
         private UcAddSeries()
         {
             InitializeComponent();
-            pnl_content.Left = (pnl_content.Parent.Width - pnl_content.Width) / 2;
-            pnl_content.Top = (pnl_content.Parent.Height - pnl_content.Height) / 2;
+            CenterByPanel(pnl_content);
         }
 
         public static void Reset()

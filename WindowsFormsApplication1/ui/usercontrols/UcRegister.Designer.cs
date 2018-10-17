@@ -37,19 +37,20 @@
         	this.btn_registrieren = new System.Windows.Forms.Button();
         	this.btn_abbrechen = new System.Windows.Forms.Button();
         	this.pnl_content = new System.Windows.Forms.Panel();
+        	this.btn_back = new System.Windows.Forms.Button();
         	this.pnl_content.SuspendLayout();
         	this.SuspendLayout();
         	// 
         	// txt_username
         	// 
-        	this.txt_username.Location = new System.Drawing.Point(3, 27);
+        	this.txt_username.Location = new System.Drawing.Point(31, 27);
         	this.txt_username.Name = "txt_username";
         	this.txt_username.Size = new System.Drawing.Size(100, 20);
         	this.txt_username.TabIndex = 0;
         	// 
         	// txt_password
         	// 
-        	this.txt_password.Location = new System.Drawing.Point(3, 87);
+        	this.txt_password.Location = new System.Drawing.Point(31, 87);
         	this.txt_password.Name = "txt_password";
         	this.txt_password.PasswordChar = '*';
         	this.txt_password.Size = new System.Drawing.Size(100, 20);
@@ -57,7 +58,7 @@
         	// 
         	// txt_password2
         	// 
-        	this.txt_password2.Location = new System.Drawing.Point(3, 130);
+        	this.txt_password2.Location = new System.Drawing.Point(31, 130);
         	this.txt_password2.Name = "txt_password2";
         	this.txt_password2.PasswordChar = '*';
         	this.txt_password2.Size = new System.Drawing.Size(100, 20);
@@ -66,7 +67,7 @@
         	// label1
         	// 
         	this.label1.AutoSize = true;
-        	this.label1.Location = new System.Drawing.Point(3, 11);
+        	this.label1.Location = new System.Drawing.Point(31, 11);
         	this.label1.Name = "label1";
         	this.label1.Size = new System.Drawing.Size(75, 13);
         	this.label1.TabIndex = 3;
@@ -75,7 +76,7 @@
         	// label2
         	// 
         	this.label2.AutoSize = true;
-        	this.label2.Location = new System.Drawing.Point(3, 71);
+        	this.label2.Location = new System.Drawing.Point(31, 71);
         	this.label2.Name = "label2";
         	this.label2.Size = new System.Drawing.Size(50, 13);
         	this.label2.TabIndex = 4;
@@ -84,7 +85,7 @@
         	// label3
         	// 
         	this.label3.AutoSize = true;
-        	this.label3.Location = new System.Drawing.Point(3, 114);
+        	this.label3.Location = new System.Drawing.Point(31, 114);
         	this.label3.Name = "label3";
         	this.label3.Size = new System.Drawing.Size(110, 13);
         	this.label3.TabIndex = 5;
@@ -92,7 +93,7 @@
         	// 
         	// btn_registrieren
         	// 
-        	this.btn_registrieren.Location = new System.Drawing.Point(3, 162);
+        	this.btn_registrieren.Location = new System.Drawing.Point(6, 161);
         	this.btn_registrieren.Name = "btn_registrieren";
         	this.btn_registrieren.Size = new System.Drawing.Size(75, 23);
         	this.btn_registrieren.TabIndex = 3;
@@ -112,6 +113,7 @@
         	// 
         	// pnl_content
         	// 
+        	this.pnl_content.Controls.Add(this.btn_back);
         	this.pnl_content.Controls.Add(this.label1);
         	this.pnl_content.Controls.Add(this.btn_abbrechen);
         	this.pnl_content.Controls.Add(this.txt_username);
@@ -120,10 +122,20 @@
         	this.pnl_content.Controls.Add(this.label3);
         	this.pnl_content.Controls.Add(this.txt_password2);
         	this.pnl_content.Controls.Add(this.label2);
-        	this.pnl_content.Location = new System.Drawing.Point(320, 90);
+        	this.pnl_content.Location = new System.Drawing.Point(363, 127);
         	this.pnl_content.Name = "pnl_content";
-        	this.pnl_content.Size = new System.Drawing.Size(113, 193);
+        	this.pnl_content.Size = new System.Drawing.Size(167, 193);
         	this.pnl_content.TabIndex = 6;
+        	// 
+        	// btn_back
+        	// 
+        	this.btn_back.Location = new System.Drawing.Point(87, 161);
+        	this.btn_back.Name = "btn_back";
+        	this.btn_back.Size = new System.Drawing.Size(75, 23);
+        	this.btn_back.TabIndex = 6;
+        	this.btn_back.Text = "Zurück";
+        	this.btn_back.UseVisualStyleBackColor = true;
+        	this.btn_back.Click += new System.EventHandler(this.Btn_backClick);
         	// 
         	// UcRegister
         	// 
@@ -148,5 +160,6 @@
         private System.Windows.Forms.Button btn_registrieren;
         private System.Windows.Forms.Button btn_abbrechen;
         private System.Windows.Forms.Panel pnl_content;
+        private System.Windows.Forms.Button btn_back;
     }
 }
