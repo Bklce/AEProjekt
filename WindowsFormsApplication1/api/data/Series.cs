@@ -1,18 +1,17 @@
 ﻿
 using System.Collections.Generic;
+using WindowsFormsApplication1.api.data;
 
 namespace Seriendatenbank.data
 {
     public class Series
     {
-        public Series(int id_series, string seriesName, byte[] picture, string description, List<Genre> genres, int numberOfSeasons)
+        public Series(int id_series, string seriesName, byte[] picture, string description)
         {
             Id_series = id_series;
             SeriesName = seriesName;
             Picture = picture;
             Description = description;
-            Genres = genres;
-            NumberOfSeasons = numberOfSeasons;
         }
 
         public int Id_series
@@ -28,12 +27,12 @@ namespace Seriendatenbank.data
         { get; private set; }
 
         public List<Genre> Genres
-        { get; private set; }
+        { get; set; }
 
-        public int NumberOfSeasons
-        { get; private set; }
+        public List<Season> Seasons
+        { get; set; }
         
-        public int AverageRating
+        public AverageRating AverageRating
         { get; set; }
     }
 }

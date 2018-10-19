@@ -59,6 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="api\data\AverageRating.cs" />
+    <Compile Include="api\data\Season.cs" />
     <Compile Include="api\IDataAccess.cs" />
     <Compile Include="database\DataAccess.cs" />
     <Compile Include="database\DBConnection.cs" />

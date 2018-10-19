@@ -32,7 +32,7 @@ namespace WindowsFormsApplication1.ui.usercontrols
             InitializeComponent();
             CenterByPanel(pnl_content);
             
-            series = dataAccess.GetSeriesWithAverageRatings();
+            series = dataAccess.GetSeries();
             LoadSeries(series);
         }
 

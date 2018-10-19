@@ -14,6 +14,9 @@
         private WindowsFormsApplication1.ui.buttons.SeenToggleButton tb_seen;
         private WindowsFormsApplication1.ui.buttons.MarkedToggleButton tb_marked;
         private WindowsFormsApplication1.ui.buttons.FavoriteToggleButton tb_favorite;
+        private System.Windows.Forms.FlowLayoutPanel fp_genres;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_seasons;
 
         protected override void Dispose(bool disposing)
         {
@@ -38,6 +41,9 @@
         	this.lbl_description = new System.Windows.Forms.Label();
         	this.pb_series_picture = new System.Windows.Forms.PictureBox();
         	this.lbl_series_name = new System.Windows.Forms.Label();
+        	this.fp_genres = new System.Windows.Forms.FlowLayoutPanel();
+        	this.lbl_seasons = new System.Windows.Forms.Label();
+        	this.label2 = new System.Windows.Forms.Label();
         	this.pnl_content.SuspendLayout();
         	((System.ComponentModel.ISupportInitialize)(this.tb_seen)).BeginInit();
         	((System.ComponentModel.ISupportInitialize)(this.tb_marked)).BeginInit();
@@ -47,6 +53,9 @@
         	// 
         	// pnl_content
         	// 
+        	this.pnl_content.Controls.Add(this.label2);
+        	this.pnl_content.Controls.Add(this.lbl_seasons);
+        	this.pnl_content.Controls.Add(this.fp_genres);
         	this.pnl_content.Controls.Add(this.tb_seen);
         	this.pnl_content.Controls.Add(this.tb_marked);
         	this.pnl_content.Controls.Add(this.tb_favorite);
@@ -57,15 +66,15 @@
         	this.pnl_content.Controls.Add(this.lbl_description);
         	this.pnl_content.Controls.Add(this.pb_series_picture);
         	this.pnl_content.Controls.Add(this.lbl_series_name);
-        	this.pnl_content.Location = new System.Drawing.Point(247, 58);
+        	this.pnl_content.Location = new System.Drawing.Point(31, 24);
         	this.pnl_content.Name = "pnl_content";
-        	this.pnl_content.Size = new System.Drawing.Size(467, 378);
+        	this.pnl_content.Size = new System.Drawing.Size(889, 463);
         	this.pnl_content.TabIndex = 0;
         	// 
         	// tb_seen
         	// 
         	this.tb_seen.Cursor = System.Windows.Forms.Cursors.Hand;
-        	this.tb_seen.Location = new System.Drawing.Point(402, 281);
+        	this.tb_seen.Location = new System.Drawing.Point(395, 118);
         	this.tb_seen.Name = "tb_seen";
         	this.tb_seen.Size = new System.Drawing.Size(50, 50);
         	this.tb_seen.TabIndex = 9;
@@ -75,7 +84,7 @@
         	// tb_marked
         	// 
         	this.tb_marked.Cursor = System.Windows.Forms.Cursors.Hand;
-        	this.tb_marked.Location = new System.Drawing.Point(336, 281);
+        	this.tb_marked.Location = new System.Drawing.Point(329, 118);
         	this.tb_marked.Name = "tb_marked";
         	this.tb_marked.Size = new System.Drawing.Size(50, 50);
         	this.tb_marked.TabIndex = 8;
@@ -85,7 +94,7 @@
         	// tb_favorite
         	// 
         	this.tb_favorite.Cursor = System.Windows.Forms.Cursors.Hand;
-        	this.tb_favorite.Location = new System.Drawing.Point(272, 281);
+        	this.tb_favorite.Location = new System.Drawing.Point(265, 118);
         	this.tb_favorite.Name = "tb_favorite";
         	this.tb_favorite.Size = new System.Drawing.Size(50, 50);
         	this.tb_favorite.TabIndex = 7;
@@ -94,7 +103,7 @@
         	// 
         	// btn_back
         	// 
-        	this.btn_back.Location = new System.Drawing.Point(3, 342);
+        	this.btn_back.Location = new System.Drawing.Point(3, 429);
         	this.btn_back.Name = "btn_back";
         	this.btn_back.Size = new System.Drawing.Size(75, 23);
         	this.btn_back.TabIndex = 0;
@@ -104,7 +113,7 @@
         	// 
         	// btn_change_rating
         	// 
-        	this.btn_change_rating.Location = new System.Drawing.Point(175, 339);
+        	this.btn_change_rating.Location = new System.Drawing.Point(370, 186);
         	this.btn_change_rating.Name = "btn_change_rating";
         	this.btn_change_rating.Size = new System.Drawing.Size(75, 23);
         	this.btn_change_rating.TabIndex = 1;
@@ -114,15 +123,15 @@
         	// 
         	// txt_rating
         	// 
-        	this.txt_rating.Location = new System.Drawing.Point(175, 281);
+        	this.txt_rating.Location = new System.Drawing.Point(177, 118);
         	this.txt_rating.Name = "txt_rating";
-        	this.txt_rating.Size = new System.Drawing.Size(44, 20);
+        	this.txt_rating.Size = new System.Drawing.Size(35, 20);
         	this.txt_rating.TabIndex = 2;
         	this.txt_rating.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
         	// 
         	// label1
         	// 
-        	this.label1.Location = new System.Drawing.Point(225, 284);
+        	this.label1.Location = new System.Drawing.Point(218, 121);
         	this.label1.Name = "label1";
         	this.label1.Size = new System.Drawing.Size(58, 19);
         	this.label1.TabIndex = 3;
@@ -130,9 +139,9 @@
         	// 
         	// lbl_description
         	// 
-        	this.lbl_description.Location = new System.Drawing.Point(177, 35);
+        	this.lbl_description.Location = new System.Drawing.Point(3, 245);
         	this.lbl_description.Name = "lbl_description";
-        	this.lbl_description.Size = new System.Drawing.Size(275, 243);
+        	this.lbl_description.Size = new System.Drawing.Size(852, 172);
         	this.lbl_description.TabIndex = 2;
         	this.lbl_description.Text = "description";
         	// 
@@ -146,11 +155,36 @@
         	// 
         	// lbl_series_name
         	// 
-        	this.lbl_series_name.Location = new System.Drawing.Point(3, 9);
+        	this.lbl_series_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+        	this.lbl_series_name.Location = new System.Drawing.Point(177, 35);
         	this.lbl_series_name.Name = "lbl_series_name";
-        	this.lbl_series_name.Size = new System.Drawing.Size(237, 23);
+        	this.lbl_series_name.Size = new System.Drawing.Size(678, 44);
         	this.lbl_series_name.TabIndex = 0;
         	this.lbl_series_name.Text = "seriesname";
+        	// 
+        	// fp_genres
+        	// 
+        	this.fp_genres.Location = new System.Drawing.Point(177, 82);
+        	this.fp_genres.Name = "fp_genres";
+        	this.fp_genres.Size = new System.Drawing.Size(663, 30);
+        	this.fp_genres.TabIndex = 10;
+        	// 
+        	// lbl_seasons
+        	// 
+        	this.lbl_seasons.Location = new System.Drawing.Point(34, 223);
+        	this.lbl_seasons.Name = "lbl_seasons";
+        	this.lbl_seasons.Size = new System.Drawing.Size(35, 22);
+        	this.lbl_seasons.TabIndex = 11;
+        	this.lbl_seasons.Text = "numberSeasons";
+        	this.lbl_seasons.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+        	// 
+        	// label2
+        	// 
+        	this.label2.Location = new System.Drawing.Point(75, 223);
+        	this.label2.Name = "label2";
+        	this.label2.Size = new System.Drawing.Size(58, 22);
+        	this.label2.TabIndex = 12;
+        	this.label2.Text = "Staffel(n)";
         	// 
         	// UcSerie
         	// 

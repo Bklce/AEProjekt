@@ -5,6 +5,7 @@ using Seriendatenbank.api;
 using Seriendatenbank.data;
 using Seriendatenbank.util;
 using System.Linq;
+using WindowsFormsApplication1.api.data;
 
 namespace Seriendatenbank.database
 {
@@ -16,6 +17,7 @@ namespace Seriendatenbank.database
         private const string UPDATE_USER_USERNAME = "UPDATE benutzer SET benutzername = @Benutzername WHERE benutzername = @IdBenutzerNeu";
         private const string ADD_GENRE = "INSERT INTO genre (bezeichnung) VALUES (@Bezeichnung)";
         private const string GET_GENRES = "SELECT * FROM genre";
+        private const string GET_GENRES_FOR_SERIES = "SELECT id_genre FROM serie_genre WHERE id_serie = @IdSerie";
         private const string ADD_RATING = "INSERT INTO bewertung (id_serie, id_benutzer, favorit, vorgemerkt, gesehen, rating) VALUES (@IdSerie, @IdBenutzer, @Favorit, @Vorgemerkt, @Gesehen, @Rating)";
         private const string GET_RATING = "SELECT * FROM bewertung WHERE id_serie = @IdSerie AND id_benutzer = @IdBenutzer";
         private const string GET_ALL_RATINGS = "SELECT * FROM bewertung WHERE id_benutzer = @IdBenutzer";
@@ -25,10 +27,11 @@ namespace Seriendatenbank.database
         private const string UPDATE_RATING_RATING = "UPDATE bewertung SET rating = @Rating WHERE id_serie = @IdSerie, id_benutzer = @IdBenutzer";
         private const string UPDATE_RATING = "UPDATE bewertung SET favorit = @Favorit, gesehen = @Gesehen, vorgemerkt = @Vorgemerkt, rating = @Rating WHERE id_serie = @IdSerie AND id_benutzer = @IdBenutzer";
         private const string GET_AVERAGE_RATING = "SELECT durchschnitt FROM serie_rating WHERE id_serie = @IdSerie";
-        private const string GET_AVERAGE_RATINGS = "SELECT id_serie, durchschnitt FROM serie_rating";
+        private const string GET_AVERAGE_RATINGS = "SELECT id_serie, durchschnitt, anzahl_bewertungen FROM serie_rating";
         private const string ADD_SERIES = "INSERT INTO serie (serienname, beschreibung, bild) VALUES (@Serienname, @Beschreibung, @Bild)";
         private const string GET_SERIES = "SELECT * FROM serie WHERE id_serie = @IdSerie";
         private const string GET_ALL_SERIES = "SELECT * FROM serie";
+        private const string GET_ALL_SEASONS = "SELECT * FROM serie_staffel";
 
         private static DataAccess instance;
         private readonly OleDbConnection connection;
@@ -53,8 +56,7 @@ namespace Seriendatenbank.database
             {
                 var command = new OleDbCommand(ADD_USER, connection);
                 command.Parameters.Add("@Benutzername", OleDbType.VarWChar, username.Length).Value = username;
-
-                var hash = new Hash(password);
+				var hash = new Hash(password);
                 byte[] hashedPassword = hash.HashValue;
                 command.Parameters.Add("@Hash", OleDbType.Binary, hashedPassword.Length).Value = hashedPassword;
                 byte[] salt = hash.Salt;
@@ -62,8 +64,6 @@ namespace Seriendatenbank.database
 
                 if (command.ExecuteNonQuery() > 0)
                     return true;
-
-                return false;
             }
             catch (Exception e)
             {
@@ -82,12 +82,10 @@ namespace Seriendatenbank.database
             {
                 var command = new OleDbCommand(GET_USER, connection);
                 command.Parameters.Add("@Benutzername", OleDbType.VarWChar, username.Length).Value = username;
-
                 OleDbDataReader reader = command.ExecuteReader();
 
                 if (reader.Read())
                     return new User(Int32.Parse(reader["id_benutzer"].ToString()), reader["benutzername"].ToString(), new Hash((byte[])reader["hash"], (byte[])reader["salt"]));
-                return null;
             }
             catch (Exception e)
             {
@@ -120,7 +118,6 @@ namespace Seriendatenbank.database
             {
                 //TODO mit addUser zusammenführen
                 var command = new OleDbCommand(UPDATE_USER_PASSWORD, connection);
-                
                 var hash = new Hash(password);
                 command.Parameters.Add("@Salt", OleDbType.Binary, hash.Salt.Length).Value = hash.Salt;
                 command.Parameters.Add("@Hash", OleDbType.Binary, hash.HashValue.Length).Value = hash.HashValue;
@@ -129,7 +126,6 @@ namespace Seriendatenbank.database
 
                 if (command.ExecuteNonQuery() > 0)
                     return true;
-                return false;
             }
             catch (Exception e)
             {
@@ -152,8 +148,6 @@ namespace Seriendatenbank.database
 
                 if (command.ExecuteNonQuery() > 0)
                     return true;
-
-                return false;
             }
             catch (Exception e)
             {
@@ -171,14 +165,10 @@ namespace Seriendatenbank.database
             try
             {
                 var command = new OleDbCommand(ADD_GENRE, connection);
-
                 command.Parameters.Add("@Bezeichnung", OleDbType.VarWChar, genre.Length).Value = genre;
                 
-
                 if (command.ExecuteNonQuery() > 0)
                     return true;
-
-                return false;
             }
             catch (Exception e)
             {
@@ -193,20 +183,16 @@ namespace Seriendatenbank.database
         public List<Genre> GetGenres()
         {
             connection.Open();
+            
+            var genres = new List<Genre>();
             try
             {
                 var command = new OleDbCommand(GET_GENRES, connection);
-
                 OleDbDataReader reader = command.ExecuteReader();
-                var genres = new List<Genre>();
                 while (reader.Read())
                 {
-                    genres.Add(new Genre(Int32.Parse(reader["id_genre"].ToString()), reader["beschreibung"].ToString()));
+                    genres.Add(new Genre(Int32.Parse(reader["id_genre"].ToString()), reader["bezeichnung"].ToString()));
                 }
-
-                if (genres.Count > 0)
-                    return genres;
-                return null;
             }
             catch (Exception e)
             {
@@ -215,7 +201,32 @@ namespace Seriendatenbank.database
             finally
             { connection.Close(); }
 
-            return null;
+            return genres;
+        }
+        
+        public List<int> GetGenresForSeries(int idSeries){
+        	connection.Open();
+        	
+        	var genreIds = new List<int>();
+            try
+            {
+                var command = new OleDbCommand(GET_GENRES_FOR_SERIES, connection);
+
+                OleDbDataReader reader = command.ExecuteReader();
+               
+                while (reader.Read())
+                {
+                	genreIds.Add(Int32.Parse(reader["id_genre"].ToString()));
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("\nGetGenres: " + e);
+            }
+            finally
+            { connection.Close(); }
+
+            return genreIds;
         }
 
         protected bool AddRating(Rating rating)
@@ -224,7 +235,6 @@ namespace Seriendatenbank.database
             try
             {
                 var command = new OleDbCommand(ADD_RATING, connection);
-                
                 command.Parameters.AddWithValue("@IdSerie", rating.Id_series);
                 command.Parameters.AddWithValue("@IdBenutzer", rating.Id_user);
                 command.Parameters.AddWithValue("@Favorit", rating.Favorite);
@@ -234,8 +244,6 @@ namespace Seriendatenbank.database
                 
                 if (command.ExecuteNonQuery() > 0)
                     return true;
-
-                return false;
             }
             catch (Exception e)
             {
@@ -255,13 +263,10 @@ namespace Seriendatenbank.database
                 var command = new OleDbCommand(GET_RATING, connection);
                 command.Parameters.AddWithValue("@IdSerie", id_series);
                 command.Parameters.AddWithValue("@IdBenutzer", id_user);
-
                 OleDbDataReader reader = command.ExecuteReader();
 
                 if (reader.Read())
                 	return new Rating(id_series, id_user, (bool)reader["favorit"], (bool)reader["vorgemerkt"], (bool)reader["gesehen"], Int32.Parse(reader["rating"].ToString()));
-                
-                return null;
             }
             catch (Exception e)
             {
@@ -276,6 +281,8 @@ namespace Seriendatenbank.database
         public Dictionary<int, Rating> GetAllRatings(int id_user)
         {
             connection.Open();
+            
+            var allRatings = new Dictionary<int,Rating>();
             try
             {
                 var command = new OleDbCommand(GET_ALL_RATINGS, connection);
@@ -283,13 +290,11 @@ namespace Seriendatenbank.database
 
                 OleDbDataReader reader = command.ExecuteReader();
 
-                var all_ratings = new Dictionary<int,Rating>();
                 while (reader.Read())
                 {
                     int serien_id = Int32.Parse(reader["id_serie"].ToString());
-                    all_ratings.Add(serien_id, new Rating(serien_id, id_user, (bool)reader["favorit"], (bool)reader["vorgemerkt"], (bool)reader["gesehen"], Int32.Parse(reader["rating"].ToString())));
+                    allRatings.Add(serien_id, new Rating(serien_id, id_user, (bool)reader["favorit"], (bool)reader["vorgemerkt"], (bool)reader["gesehen"], Int32.Parse(reader["rating"].ToString())));
                 }
-                return all_ratings;
             }
             catch (Exception e)
             {
@@ -297,8 +302,8 @@ namespace Seriendatenbank.database
             }
             finally
             { connection.Close(); }
-
-            return null;
+            
+            return allRatings;
         }
         
         public bool UpdateOrAddRating(Rating rating){
@@ -314,8 +319,7 @@ namespace Seriendatenbank.database
             connection.Open();
             try
             {
-                var command = new OleDbCommand(UPDATE_RATING, connection);
-                
+                var command = new OleDbCommand(UPDATE_RATING, connection); 
                 command.Parameters.AddWithValue("@Favorit", rating.Favorite);
                 command.Parameters.AddWithValue("@Gesehen", rating.Seen);
                 command.Parameters.AddWithValue("@Vorgemerkt", rating.Marked);
@@ -325,8 +329,6 @@ namespace Seriendatenbank.database
                 
                 if (command.ExecuteNonQuery() > 0)
                     return true;
-
-                return false;
             }
             catch (Exception e)
             {
@@ -334,23 +336,22 @@ namespace Seriendatenbank.database
             }
             finally
             { connection.Close(); }
+            
             return false;
         }
 
-        public Dictionary<int, int> GetAverageRatingsForSeries()
+        public List<AverageRating> GetAverageRatingsForSeries()
         {
             connection.Open();
+            
+            var allRatings = new List<AverageRating>();
             try
             {
-            	//
                 var command = new OleDbCommand(GET_AVERAGE_RATINGS, connection);
                 OleDbDataReader reader = command.ExecuteReader();
 
-                var all_ratings = new Dictionary<int, int>();
                 while (reader.Read())
-                	all_ratings.Add(Int32.Parse(reader["id_serie"].ToString()), (int)Math.Round((double)reader["durchschnitt"], 0)); //Round up
-                 
-                return all_ratings;
+                	allRatings.Add(new AverageRating(Int32.Parse(reader["id_serie"].ToString()), (int)Math.Round((double)reader["durchschnitt"], 0), Int32.Parse(reader["anzahl_bewertungen"].ToString()))); //Round up
             }
             catch (Exception e)
             {
@@ -359,7 +360,7 @@ namespace Seriendatenbank.database
             finally
             { connection.Close(); }
 
-            return new Dictionary<int, int>();
+            return allRatings;
         }
 
         public bool AddSeries(string seriesName, byte[] picture, string description, List<Genre> genres, int numberOfSeasons)
@@ -376,8 +377,6 @@ namespace Seriendatenbank.database
 
                 if (command.ExecuteNonQuery() > 0)
                     return true;
-
-                return false;
             }
             catch (Exception e)
             {
@@ -389,24 +388,20 @@ namespace Seriendatenbank.database
             return false;
         }
 
-        public List<Series> GetSeries()
+        private List<Series> GetSeriesPlain()
         {
             connection.Open();
+            
+            var series = new List<Series>();
             try
             {
                 var command = new OleDbCommand(GET_ALL_SERIES, connection);
-
                 OleDbDataReader reader = command.ExecuteReader();
-                var series = new List<Series>();
+               
                 while (reader.Read())
                 {
-                    series.Add(new Series(Int32.Parse(reader["id_serie"].ToString()), reader["serienname"].ToString(), (byte[])reader["bild"], reader["beschreibung"].ToString(), new List<Genre>
-                        (), -1));
+                	series.Add(new Series(Int32.Parse(reader["id_serie"].ToString()), reader["serienname"].ToString(), (byte[])reader["bild"], reader["beschreibung"].ToString()));
                 }
-
-                if (series.Count > 0)
-                    return series;
-                return null;
             }
             catch (Exception e)
             {
@@ -415,19 +410,62 @@ namespace Seriendatenbank.database
             finally
             { connection.Close(); }
 
-            return null;
+            return series;
         }
         
-        public List<Series> GetSeriesWithAverageRatings(){
-        	List<Series> series = GetSeries();
-        	var filteredList = (Dictionary<int, Series>)series.ToDictionary(k => k.Id_series);
-        	if(filteredList != null && filteredList.Count != 0)
-        	{
-        		foreach(KeyValuePair<int, int> entry in GetAverageRatingsForSeries())
-        			filteredList[entry.Key].AverageRating = entry.Value;
-        		return filteredList.Select(x => x.Value).ToList();
-        	}
-        	return null;
+        public List<Series> GetSeries(){
+        	List<Series> series = GetSeriesPlain();
+        	var seriesAsDict = (Dictionary<int, Series>)series.ToDictionary(k => k.Id_series);
+        	
+    		foreach(AverageRating averageRating in GetAverageRatingsForSeries())
+    			seriesAsDict[averageRating.IdSeries].AverageRating = averageRating;
+    		series = seriesAsDict.Select(x => x.Value).ToList();
+    		
+    		List<Genre> genres = GetGenres();
+    		List<Season> seasons = GetSeasonsInfoForSeries();
+    		List<AverageRating> averageRatings = GetAverageRatingsForSeries();
+    		foreach(Series serie in series){
+    			
+    			if(seriesAsDict != null && seriesAsDict.Count != 0)
+    			{
+    				AverageRating rating = averageRatings[serie.Id_series];
+    				seriesAsDict[averageRating.IdSeries].AverageRating = averageRating;
+    			}
+    			
+    			var seriesGenres = new List<Genre>();
+    			var genresAsDict = (Dictionary<int, Genre>)genres.ToDictionary(k => k.Id_genre);
+    			foreach(int id in  GetGenresForSeries(serie.Id_series)){
+    				seriesGenres.Add(genresAsDict[id]);
+    			}
+    			serie.Genres = seriesGenres;
+    			
+    			var associatdSeasonEntries = seasons.Where(x => x.IdSeries == serie.Id_series).ToList();
+    			serie.Seasons = associatdSeasonEntries;
+    		}
+        	return series;
+        }
+        
+        private List<Season> GetSeasonsInfoForSeries(){
+        	connection.Open();
+        	
+        	var seasons = new List<Season>();
+            try
+            {
+                var command = new OleDbCommand(GET_ALL_SEASONS, connection);
+                OleDbDataReader reader = command.ExecuteReader(); 
+                while (reader.Read())
+                {
+                	seasons.Add(new Season(Int32.Parse(reader["id_serie"].ToString()), Int32.Parse(reader["id_staffel"].ToString()), Int32.Parse(reader["folgen_anzahl"].ToString())));
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("\nGetSeries: " + e);
+            }
+            finally
+            { connection.Close(); }
+
+            return seasons;
         }
     }
 }

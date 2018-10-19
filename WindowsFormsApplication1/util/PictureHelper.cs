@@ -9,13 +9,13 @@ namespace WindowsFormsApplication1.util
     public static class PictureHelper
     {
     	private const int WIDTH = 171;
-    	private const int HEIGTH = 176;
+    	private const int HEIGHT = 176;
     	
         public static Bitmap BitmapFromByteArray(byte[] picture)
         {
         	using(var memStream = new MemoryStream()){
             	memStream.Write(picture, 0, picture.Length);
-            	return ResizeImage(Image.FromStream(memStream), WIDTH, HEIGTH);
+            	return ResizeImage(Image.FromStream(memStream), WIDTH, HEIGHT);
         	}
         }
 
