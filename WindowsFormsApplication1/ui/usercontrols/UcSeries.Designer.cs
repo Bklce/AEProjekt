@@ -37,9 +37,16 @@
             this.btn_marked = new System.Windows.Forms.Button();
             this.btn_favorites = new System.Windows.Forms.Button();
             this.pnl_content = new System.Windows.Forms.Panel();
+            this.btn_filter = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnl_filter = new System.Windows.Forms.Panel();
+            this.rb_favorite = new System.Windows.Forms.RadioButton();
+            this.rb_vermerkt = new System.Windows.Forms.RadioButton();
+            this.rb_gesehen = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.pnl_content.SuspendLayout();
+            this.pnl_filter.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlPanel
@@ -68,6 +75,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.pnl_filter);
+            this.panel2.Controls.Add(this.btn_filter);
             this.panel2.Controls.Add(this.btn_seen);
             this.panel2.Controls.Add(this.btn_home);
             this.panel2.Controls.Add(this.btn_logout);
@@ -137,6 +146,68 @@
             this.pnl_content.Size = new System.Drawing.Size(842, 512);
             this.pnl_content.TabIndex = 4;
             // 
+            // btn_filter
+            // 
+            this.btn_filter.Location = new System.Drawing.Point(511, 11);
+            this.btn_filter.Name = "btn_filter";
+            this.btn_filter.Size = new System.Drawing.Size(75, 23);
+            this.btn_filter.TabIndex = 5;
+            this.btn_filter.Text = "Filter";
+            this.btn_filter.UseVisualStyleBackColor = true;
+            this.btn_filter.Click += new System.EventHandler(this.btn_filter_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 33);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(358, 90);
+            this.flowLayoutPanel1.TabIndex = 1;
+            // 
+            // pnl_filter
+            // 
+            this.pnl_filter.Controls.Add(this.rb_favorite);
+            this.pnl_filter.Controls.Add(this.flowLayoutPanel1);
+            this.pnl_filter.Controls.Add(this.rb_vermerkt);
+            this.pnl_filter.Controls.Add(this.rb_gesehen);
+            this.pnl_filter.Location = new System.Drawing.Point(495, 11);
+            this.pnl_filter.Name = "pnl_filter";
+            this.pnl_filter.Size = new System.Drawing.Size(10, 13);
+            this.pnl_filter.TabIndex = 0;
+            this.pnl_filter.Visible = false;
+            // 
+            // rb_favorite
+            // 
+            this.rb_favorite.AutoSize = true;
+            this.rb_favorite.Location = new System.Drawing.Point(3, 3);
+            this.rb_favorite.Name = "rb_favorite";
+            this.rb_favorite.Size = new System.Drawing.Size(69, 17);
+            this.rb_favorite.TabIndex = 3;
+            this.rb_favorite.TabStop = true;
+            this.rb_favorite.Text = "Favoriten";
+            this.rb_favorite.UseVisualStyleBackColor = true;
+            // 
+            // rb_vermerkt
+            // 
+            this.rb_vermerkt.AutoSize = true;
+            this.rb_vermerkt.Location = new System.Drawing.Point(78, 3);
+            this.rb_vermerkt.Name = "rb_vermerkt";
+            this.rb_vermerkt.Size = new System.Drawing.Size(67, 17);
+            this.rb_vermerkt.TabIndex = 4;
+            this.rb_vermerkt.TabStop = true;
+            this.rb_vermerkt.Text = "Vermerkt";
+            this.rb_vermerkt.UseVisualStyleBackColor = true;
+            // 
+            // rb_gesehen
+            // 
+            this.rb_gesehen.AutoSize = true;
+            this.rb_gesehen.Location = new System.Drawing.Point(153, 3);
+            this.rb_gesehen.Name = "rb_gesehen";
+            this.rb_gesehen.Size = new System.Drawing.Size(68, 17);
+            this.rb_gesehen.TabIndex = 5;
+            this.rb_gesehen.TabStop = true;
+            this.rb_gesehen.Text = "Gesehen";
+            this.rb_gesehen.UseVisualStyleBackColor = true;
+            // 
             // UcSeries
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -147,6 +218,8 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.pnl_content.ResumeLayout(false);
+            this.pnl_filter.ResumeLayout(false);
+            this.pnl_filter.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -161,5 +234,11 @@
         private System.Windows.Forms.Panel pnl_content;
         private System.Windows.Forms.Button btn_home;
         private System.Windows.Forms.Button btn_seen;
+        private System.Windows.Forms.Panel pnl_filter;
+        private System.Windows.Forms.RadioButton rb_favorite;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.RadioButton rb_vermerkt;
+        private System.Windows.Forms.RadioButton rb_gesehen;
+        private System.Windows.Forms.Button btn_filter;
     }
 }

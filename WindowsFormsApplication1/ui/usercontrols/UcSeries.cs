@@ -5,12 +5,14 @@ using WindowsFormsApplication1.ui.events;
 using System.Linq;
 using System.Windows.Forms;
 
+
 namespace WindowsFormsApplication1.ui.usercontrols
 {
     public partial class UcSeries : Template
     {
         private static UcSeries instance = null;
         private List<Series> series;
+        private bool visible = false;
         
         public static UcSeries Instance
         {
@@ -31,7 +33,7 @@ namespace WindowsFormsApplication1.ui.usercontrols
         {
             InitializeComponent();
             CenterByPanel(pnl_content);
-            
+
             series = dataAccess.GetSeries();
             LoadSeries(series);
         }
@@ -132,5 +134,18 @@ namespace WindowsFormsApplication1.ui.usercontrols
             	LoadSeries(all);
           	}
 		}
+
+        private void btn_filter_Click(object sender, System.EventArgs e)
+        {
+            if (visible)
+                pnl_filter.Visible = visible = false;
+            else
+            {
+                pnl_filter.Visible = visible = true;
+                Timer timer = new Timer();
+            }
+        }
+
+       // private void timer_Tick(object sender, Bin)
     }
 }

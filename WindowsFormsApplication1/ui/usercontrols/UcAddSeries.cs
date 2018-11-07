@@ -66,7 +66,6 @@ namespace WindowsFormsApplication1.ui.usercontrols
                 if (dataAccess.AddSeries(txt_series_name.Text, picture, txt_description.Text, null, Int32.Parse(txt_count_seasons.Text)))
                 {
                     MessageBox.Show("Erfolg");
-                    Notify(this, new EventData(UcSeries.Instance));
                 }
                 else
                     MessageBox.Show("Fehler");
