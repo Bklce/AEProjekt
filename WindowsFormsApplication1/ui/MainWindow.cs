@@ -39,17 +39,20 @@ namespace Seriendatenbank
             }; 
             @direct[e.Destination.GetType()]();
 
-            pnl_root.Controls.Remove(src);
+            if (e.ShouldDispose) 
+            { 
+                pnl_root.Controls.Remove(src);
 
-            var dispose = new Dictionary<Type, Action> {
-                { typeof(UcLogin), () => UcLogin.Reset()},
-                { typeof(UcRegister), () =>  UcRegister.Reset()},
-                { typeof(UcForgotPassword), () =>  UcForgotPassword.Reset()},
-                { typeof(UcSeries), () =>  UcSeries.Reset()},
-                { typeof(UcSerie), () =>  UcSerie.Reset()},
-                { typeof(UcAddSeries), () =>  UcAddSeries.Reset()},
-            };
-            @dispose[src.GetType()]();
+                var dispose = new Dictionary<Type, Action> {
+                    { typeof(UcLogin), () => UcLogin.Reset()},
+                    { typeof(UcRegister), () =>  UcRegister.Reset()},
+                    { typeof(UcForgotPassword), () =>  UcForgotPassword.Reset()},
+                    { typeof(UcSeries), () =>  UcSeries.Reset()},
+                    { typeof(UcSerie), () =>  UcSerie.Reset()},
+                    { typeof(UcAddSeries), () =>  UcAddSeries.Reset()},
+                };
+                @dispose[src.GetType()]();
+            }
         }
 
         private void BringElementToFront(Template element)

@@ -14,8 +14,11 @@ namespace WindowsFormsApplication1.ui
             Series = serie;
             lbl_series_name.Text = serie.SeriesName;
             pb_series_picture.Image = PictureHelper.BitmapFromByteArray(serie.Picture);
-            lbl_points.Text = serie.AverageRating.AverageRatingValue.ToString();
-            
+            if (serie.AverageRating.AverageRatingValue > 0)
+                lbl_points.Text = serie.AverageRating.AverageRatingValue.ToString();
+            else
+                lbl_points.Text = "";
+
             lbl_series_name.Click += new System.EventHandler(this.on_series_element_Click);
             pb_series_picture.Click += new System.EventHandler(this.on_series_element_Click);
             

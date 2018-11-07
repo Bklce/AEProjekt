@@ -430,8 +430,15 @@ namespace Seriendatenbank.database
     			if(seriesAsDict != null && seriesAsDict.Count != 0)
     			{
                     //I'm amazing
-                    var rating = averageRatings.Where(x => x.IdSeries == serie.Id_series).First();
-    				seriesAsDict[serie.Id_series].AverageRating = rating;
+                    var rating = averageRatings.Where(x => x.IdSeries == serie.Id_series);
+                    if (rating.Count() > 0)
+                    {
+                       seriesAsDict[serie.Id_series].AverageRating = rating.First();
+                    }
+                    else
+                    {
+                        seriesAsDict[serie.Id_series].AverageRating = new AverageRating(serie.Id_series, -1, 0);
+                    }
                 }
     			
     			var seriesGenres = new List<Genre>();

@@ -31,7 +31,7 @@ namespace WindowsFormsApplication1.ui.usercontrols
         
 		private void Btn_add_seriesClick(object sender, EventArgs e)
 		{
-			Notify(this, new EventData(UcAddSeries.Instance));
+			Notify(this, new EventData(UcAddSeries.Instance, null, false));
 		}
 	}
 }
