@@ -40,8 +40,6 @@ namespace Seriendatenbank.ui.userControls
         {
             if (String.IsNullOrWhiteSpace(txt_username.Text))
                 MessageBox.Show("Benutzername darf nicht leer sein");
-            else if (String.IsNullOrWhiteSpace(txt_password_current.Text))
-                MessageBox.Show("Aktuelles Passwort darf nicht leer sein");
             else if (String.IsNullOrWhiteSpace(txt_password_new.Text))
                 MessageBox.Show("Das neue Passwort darf nicht leer sein");
             else if (String.IsNullOrWhiteSpace(txt_password_new2.Text))
@@ -51,15 +49,11 @@ namespace Seriendatenbank.ui.userControls
             else
             {
                 User user = dataAccess.GetUser(txt_username.Text);
-                if (user != null && user.Hash.Equals(new Hash(txt_password_current.Text, user.Hash.Salt)))
+              
+                if (user != null && dataAccess.UpdateUserPassword(txt_username.Text, txt_password_new.Text))
                 {
-                    if (dataAccess.UpdateUserPassword(txt_username.Text, txt_password_new.Text))
-                    {
-                        MessageBox.Show("Passwort wurde geändert.");
-                        Notify(this, new EventData(UcLogin.Instance));
-                    }
-                    else
-                        MessageBox.Show("Das Passwort konnte nicht geändert werde, möglicherweise existiert der angegebene Benutzer nicht oder das eingegebene Passwort ist falsch.");
+                    MessageBox.Show("Passwort wurde geändert.");
+                    Notify(this, new EventData(UcLogin.Instance));
                 }
                 else
                     MessageBox.Show("Das Passwort konnte nicht geändert werde, möglicherweise existiert der angegebene Benutzer nicht oder das eingegebene Passwort ist falsch.");

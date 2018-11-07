@@ -2,12 +2,12 @@
 using System.Windows.Forms;
 using Seriendatenbank.data;
 using Seriendatenbank.database;
+using WindowsFormsApplication1.api;
 using WindowsFormsApplication1.ui.events;
 
 namespace Seriendatenbank.ui.userControls
 {
-    public partial class Template : UserControl
-    {
+    public partial class Template : UserControl { 
         protected DataAccess dataAccess = DataAccess.GetInstance();
         protected static User currentUser;
         private static List<MainWindow> observers = new List<MainWindow>();
@@ -48,5 +48,6 @@ namespace Seriendatenbank.ui.userControls
         	panel.Left = (panel.Parent.Width - panel.Width) / 2;
             panel.Top = (panel.Parent.Height - panel.Height) / 2;
         }
+    
     }
 }

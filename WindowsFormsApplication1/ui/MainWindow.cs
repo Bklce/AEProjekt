@@ -23,7 +23,7 @@ namespace Seriendatenbank
             UcLogin login = UcLogin.Instance;
             pnl_root.Controls.Add(login);
             login.Dock = DockStyle.Fill;
-            login.BringToFront();
+            login.BringToFront();          
         }
 
         //Updaten des angezeigten UserControls, wegräumen des alten

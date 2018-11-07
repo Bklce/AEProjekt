@@ -211,6 +211,7 @@ namespace Seriendatenbank.database
             try
             {
                 var command = new OleDbCommand(GET_GENRES_FOR_SERIES, connection);
+                command.Parameters.AddWithValue("@IdSerie", idSeries);
 
                 OleDbDataReader reader = command.ExecuteReader();
                
@@ -428,9 +429,10 @@ namespace Seriendatenbank.database
     			
     			if(seriesAsDict != null && seriesAsDict.Count != 0)
     			{
-    				AverageRating rating = averageRatings[serie.Id_series];
-    				seriesAsDict[averageRating.IdSeries].AverageRating = averageRating;
-    			}
+                    //I'm amazing
+                    var rating = averageRatings.Where(x => x.IdSeries == serie.Id_series).First();
+    				seriesAsDict[serie.Id_series].AverageRating = rating;
+                }
     			
     			var seriesGenres = new List<Genre>();
     			var genresAsDict = (Dictionary<int, Genre>)genres.ToDictionary(k => k.Id_genre);

@@ -68,10 +68,18 @@
     <Compile Include="api\data\Rating.cs" />
     <Compile Include="api\data\Series.cs" />
     <Compile Include="api\data\User.cs" />
-    <Compile Include="ui\buttons\FavoriteToggleButton.cs" />
-    <Compile Include="ui\buttons\MarkedToggleButton.cs" />
-    <Compile Include="ui\buttons\SeenToggleButton.cs" />
-    <Compile Include="ui\buttons\ToggleButton.cs" />
+    <Compile Include="ui\buttons\FavoriteToggleButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ui\buttons\MarkedToggleButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ui\buttons\SeenToggleButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ui\buttons\ToggleButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ui\events\EventData.cs" />
     <Compile Include="ui\MainWindow.cs">
       <SubType>Form</SubType>
@@ -93,7 +101,9 @@
     <Compile Include="ui\usercontrols\UcAddSeries.Designer.cs">
       <DependentUpon>UcAddSeries.cs</DependentUpon>
     </Compile>
-    <Compile Include="ui\usercontrols\UcAdmin.cs" />
+    <Compile Include="ui\usercontrols\UcAdmin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ui\usercontrols\UcAdmin.Designer.cs">
       <DependentUpon>UcAdmin.cs</DependentUpon>
     </Compile>
@@ -109,7 +119,9 @@
     <Compile Include="ui\usercontrols\UcLogin.Designer.cs">
       <DependentUpon>UcLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="ui\usercontrols\UcSerie.cs" />
+    <Compile Include="ui\usercontrols\UcSerie.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ui\usercontrols\UcSerie.Designer.cs">
       <DependentUpon>UcSerie.cs</DependentUpon>
     </Compile>
@@ -160,6 +172,9 @@
     <EmbeddedResource Include="ui\usercontrols\UcLogin.resx">
       <DependentUpon>UcLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\UcSerie.resx">
+      <DependentUpon>UcSerie.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ui\usercontrols\UcSeries.resx">
       <DependentUpon>UcSeries.cs</DependentUpon>
     </EmbeddedResource>
@@ -195,11 +210,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ui\events" />
-    <Folder Include="ui\buttons" />
-    <Folder Include="ui\res" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
