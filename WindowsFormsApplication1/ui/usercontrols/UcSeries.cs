@@ -5,6 +5,7 @@ using WindowsFormsApplication1.ui.events;
 using System.Linq;
 using System.Windows.Forms;
 using System;
+using System.Drawing;
 
 
 namespace WindowsFormsApplication1.ui.usercontrols
@@ -14,6 +15,11 @@ namespace WindowsFormsApplication1.ui.usercontrols
         private static UcSeries instance = null;
         private List<Series> series;
         private bool visible = false;
+        private Timer timerBackward = new Timer();
+        private Timer timerForward = new Timer();
+        private int filterWidth;
+        private int filterHeight;
+                
         
         public static UcSeries Instance
         {
@@ -34,6 +40,15 @@ namespace WindowsFormsApplication1.ui.usercontrols
         {
             InitializeComponent();
             CenterByPanel(pnl_content);
+           
+            timerBackward.Interval = 10;
+            timerBackward.Tick += timer_forward_Tick;
+
+            timerForward.Interval = 10;
+            timerForward.Tick += timer_backward_Tick;
+
+            pnl_filter.Location = new Point((btn_filter.Location.X + btn_filter.Width + 45),
+               (btn_filter.Location.Y + btn_filter.Height + 40));
 
             series = dataAccess.GetSeries();
             LoadSeries(series);
@@ -59,9 +74,13 @@ namespace WindowsFormsApplication1.ui.usercontrols
             foreach(Genre genre in dataAccess.GetGenres()){
                 var cb = new CheckBox();
                 cb.Text = genre.Description;
-                cb.Name = "cb_" + genre.Description;
+                cb.Name = "cb_" + genre.Description.ToLower();
                 fp_genreList.Controls.Add(cb);
             }
+            filterHeight = pnl_filter.Height;
+            pnl_filter.Height = 0;
+            filterWidth = pnl_filter.Width;
+            pnl_filter.Width = 0;
         }
       
         private List<Series> GetListOf(RatingType ratingType){
@@ -145,28 +164,26 @@ namespace WindowsFormsApplication1.ui.usercontrols
 
         private void btn_filter_Click(object sender, System.EventArgs e)
         {
-            if (visible)
+            if (!visible)
             {
-                Timer timer = new Timer();
-                timer.Interval = 10;
-                timer.Tick += timer_backward_Tick;
-                timer.Start();
+                pnl_filter.Visible = visible = true;
+                if(!timerBackward.Enabled)
+                    timerForward.Start();
             }
             else
             {
-                pnl_filter.Visible = visible = true;
-                pnl_filter.BringToFront();
-                Timer timer = new Timer();
-                timer.Interval = 10;
-                timer.Tick += timer_forward_Tick;
-                timer.Start();
+                if (!timerForward.Enabled)
+                {
+                    pnl_filter.BringToFront();
+                    timerBackward.Start();
+                }
             }
         }
 
         private void timer_forward_Tick(object sender, EventArgs e)
         {
             //400x300
-            if (pnl_filter.Height < 300 && pnl_filter.Width < 400) 
+            if (pnl_filter.Height <= filterHeight && pnl_filter.Width <= filterWidth) 
             {
                 pnl_filter.Height += 10;
                 pnl_filter.Width += 12;
@@ -184,7 +201,7 @@ namespace WindowsFormsApplication1.ui.usercontrols
             if (pnl_filter.Height > 1 && pnl_filter.Width > 1)
             {
                 pnl_filter.Height -= 10;
-                pnl_filter.Width -= 12;
+                pnl_filter.Width -= 15;
             }
             else
             {

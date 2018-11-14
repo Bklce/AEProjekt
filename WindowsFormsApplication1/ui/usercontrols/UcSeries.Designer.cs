@@ -115,11 +115,12 @@
             // 
             // pnl_filter
             // 
+            this.pnl_filter.AutoSize = true;
             this.pnl_filter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_filter.Controls.Add(this.flowLayoutPanel1);
             this.pnl_filter.Controls.Add(this.button1);
             this.pnl_filter.Controls.Add(this.fp_genreList);
-            this.pnl_filter.Location = new System.Drawing.Point(12, 83);
+            this.pnl_filter.Location = new System.Drawing.Point(3, 315);
             this.pnl_filter.Name = "pnl_filter";
             this.pnl_filter.Size = new System.Drawing.Size(375, 194);
             this.pnl_filter.TabIndex = 0;
@@ -204,6 +205,7 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.pnl_content.ResumeLayout(false);
+            this.pnl_content.PerformLayout();
             this.ResumeLayout(false);
 
         }
