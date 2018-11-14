@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using WindowsFormsApplication1.ui.events;
 using System.Linq;
 using System.Windows.Forms;
+using System;
 
 
 namespace WindowsFormsApplication1.ui.usercontrols
@@ -53,6 +54,13 @@ namespace WindowsFormsApplication1.ui.usercontrols
                 tlPanel.Controls.Add(element, elementCount, tlPanel.RowCount - 1);
                
                 elementCount++;
+            }
+        
+            foreach(Genre genre in dataAccess.GetGenres()){
+                var cb = new CheckBox();
+                cb.Text = genre.Description;
+                cb.Name = "cb_" + genre.Description;
+                fp_genreList.Controls.Add(cb);
             }
         }
       
@@ -138,14 +146,52 @@ namespace WindowsFormsApplication1.ui.usercontrols
         private void btn_filter_Click(object sender, System.EventArgs e)
         {
             if (visible)
-                pnl_filter.Visible = visible = false;
+            {
+                Timer timer = new Timer();
+                timer.Interval = 10;
+                timer.Tick += timer_backward_Tick;
+                timer.Start();
+            }
             else
             {
                 pnl_filter.Visible = visible = true;
+                pnl_filter.BringToFront();
                 Timer timer = new Timer();
+                timer.Interval = 10;
+                timer.Tick += timer_forward_Tick;
+                timer.Start();
             }
         }
 
-       // private void timer_Tick(object sender, Bin)
+        private void timer_forward_Tick(object sender, EventArgs e)
+        {
+            //400x300
+            if (pnl_filter.Height < 300 && pnl_filter.Width < 400) 
+            {
+                pnl_filter.Height += 10;
+                pnl_filter.Width += 12;
+            }
+            else 
+            {
+                ((Timer)sender).Stop();
+            }
+                
+        }
+
+        private void timer_backward_Tick(object sender, EventArgs e)
+        {
+            //400x300
+            if (pnl_filter.Height > 1 && pnl_filter.Width > 1)
+            {
+                pnl_filter.Height -= 10;
+                pnl_filter.Width -= 12;
+            }
+            else
+            {
+                ((Timer)sender).Stop();
+                pnl_filter.Visible = visible = false;
+            }
+
+        }
     }
 }
