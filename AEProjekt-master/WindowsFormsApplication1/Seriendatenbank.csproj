@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E351AAF0-5DE9-4053-924A-A9E762948EE5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WindowsFormsApplication1</RootNamespace>
+    <AssemblyName>WindowsFormsApplication1</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="api\data\AverageRating.cs" />
+    <Compile Include="api\data\Season.cs" />
+    <Compile Include="api\IDataAccess.cs" />
+    <Compile Include="database\DataAccess.cs" />
+    <Compile Include="database\DBConnection.cs" />
+    <Compile Include="api\data\Genre.cs" />
+    <Compile Include="api\data\Rating.cs" />
+    <Compile Include="api\data\Series.cs" />
+    <Compile Include="api\data\User.cs" />
+    <Compile Include="ui\buttons\FavoriteToggleButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ui\buttons\MarkedToggleButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ui\buttons\SeenToggleButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ui\buttons\ToggleButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ui\events\EventData.cs" />
+    <Compile Include="ui\MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ui\SeriesElement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\SeriesElement.Designer.cs">
+      <DependentUpon>SeriesElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcAddSeries.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcAddSeries.Designer.cs">
+      <DependentUpon>UcAddSeries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcAdmin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcAdmin.Designer.cs">
+      <DependentUpon>UcAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcForgotPassword.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcForgotPassword.Designer.cs">
+      <DependentUpon>UcForgotPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcLogin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcLogin.Designer.cs">
+      <DependentUpon>UcLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcSerie.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcSerie.Designer.cs">
+      <DependentUpon>UcSerie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcSeries.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcSeries.Designer.cs">
+      <DependentUpon>UcSeries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcTemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcTemplate.Designer.cs">
+      <DependentUpon>UcTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcRegister.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\usercontrols\UcRegister.Designer.cs">
+      <DependentUpon>UcRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="util\PictureHelper.cs" />
+    <Compile Include="util\Hash.cs" />
+    <EmbeddedResource Include="ui\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ui\SeriesElement.resx">
+      <DependentUpon>SeriesElement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\UcAddSeries.resx">
+      <DependentUpon>UcAddSeries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\UcAdmin.resx">
+      <DependentUpon>UcAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\UcForgotPassword.resx">
+      <DependentUpon>UcForgotPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\UcLogin.resx">
+      <DependentUpon>UcLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\UcSerie.resx">
+      <DependentUpon>UcSerie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\UcSeries.resx">
+      <DependentUpon>UcSeries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\UcTemplate.resx">
+      <DependentUpon>UcTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\UcRegister.resx">
+      <DependentUpon>UcRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="ui\res\marked_empty.png" />
+    <None Include="ui\res\marked_full.png" />
+    <None Include="ui\res\seen_empty.png" />
+    <None Include="ui\res\seen_full.png" />
+    <None Include="ui\res\start_full.png" />
+    <None Include="ui\res\star_empty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ui\panels\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
