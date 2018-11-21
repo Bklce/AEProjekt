@@ -19,8 +19,8 @@ namespace WindowsFormsApplication1.ui.usercontrols
         private Timer timerForward = new Timer();
         private int filterWidth;
         private int filterHeight;
-                
-        
+
+
         public static UcSeries Instance
         {
             get
@@ -30,7 +30,7 @@ namespace WindowsFormsApplication1.ui.usercontrols
                 return instance;
             }
         }
-        
+
         public static void Reset()
         {
             instance = null;
@@ -40,12 +40,12 @@ namespace WindowsFormsApplication1.ui.usercontrols
         {
             InitializeComponent();
             CenterByPanel(pnl_content);
-           
+
             timerBackward.Interval = 10;
-            timerBackward.Tick += timer_forward_Tick;
+            timerBackward.Tick += timer_backward_Tick;
 
             timerForward.Interval = 10;
-            timerForward.Tick += timer_backward_Tick;
+            timerForward.Tick += timer_forward_Tick;
 
             pnl_filter.Location = new Point((btn_filter.Location.X + btn_filter.Width + 45),
                (btn_filter.Location.Y + btn_filter.Height + 40));
@@ -67,11 +67,12 @@ namespace WindowsFormsApplication1.ui.usercontrols
 
                 var element = new SeriesElement(serie);
                 tlPanel.Controls.Add(element, elementCount, tlPanel.RowCount - 1);
-               
+
                 elementCount++;
             }
-        
-            foreach(Genre genre in dataAccess.GetGenres()){
+
+            foreach (Genre genre in dataAccess.GetGenres())
+            {
                 var cb = new CheckBox();
                 cb.Text = genre.Description;
                 cb.Name = "cb_" + genre.Description.ToLower();
@@ -82,99 +83,99 @@ namespace WindowsFormsApplication1.ui.usercontrols
             filterWidth = pnl_filter.Width;
             pnl_filter.Width = 0;
         }
-      
-        private List<Series> GetListOf(RatingType ratingType){
-        	tlPanel.Controls.Clear();
+
+        private List<Series> GetListOf(RatingType ratingType, List<string> genres)
+        {
+            tlPanel.Controls.Clear();
             Dictionary<int, Rating> ratings = dataAccess.GetAllRatings(currentUser.Id);
             currentUser.Ratings = ratings;
-            
+            List<Series> resutlSeries = new List<Series>();
+
             if (ratings != null)
             {
-            	var filteredList = new List<int>();
-            	switch(ratingType){
-                    	case RatingType.FAVORITES:
-            				filteredList = ratings.Where(x => x.Value.Favorite).Select(x => x.Value.Id_series).ToList();
-                    		break;
-                    	case RatingType.MARKED:
-            				filteredList = ratings.Where(x => x.Value.Marked).Select(x => x.Value.Id_series).ToList();
-                    		break; 
-                    	case RatingType.SEEN:
-            				filteredList = ratings.Where(x => x.Value.Seen).Select(x => x.Value.Id_series).ToList();
-                    		break;
-                    	case RatingType.ALL:
-            				filteredList = series.Select(x => x.Id_series).ToList();
-                    		break;
+                var filteredList = new List<int>();
+                switch (ratingType)
+                {
+                    case RatingType.FAVORITES:
+                        filteredList = ratings.Where(x => x.Value.Favorite).Select(x => x.Value.Id_series).ToList();
+                        break;
+                    case RatingType.MARKED:
+                        filteredList = ratings.Where(x => x.Value.Marked).Select(x => x.Value.Id_series).ToList();
+                        break;
+                    case RatingType.SEEN:
+                        filteredList = ratings.Where(x => x.Value.Seen).Select(x => x.Value.Id_series).ToList();
+                        break;
+                    case RatingType.ALL:
+                        filteredList = series.Select(x => x.Id_series).ToList();
+                        break;
                 }
-            	return series.Where(x => filteredList.Contains(x.Id_series)).ToList();
+
+                List<Series> filteredSeries = series.Where(x => filteredList.Contains(x.Id_series)).ToList();
+                if (genres.Count > 0)
+                {
+                    foreach (Series serie in filteredSeries)
+                    {
+                        int bananenBrot = 0;
+                        foreach (Genre genre in serie.Genres)
+                        {
+                            if (genres.Contains(genre.Description))
+                            {
+                                bananenBrot++;
+                            }
+                        }
+                        if (bananenBrot == genres.Count)
+                        {
+                            resutlSeries.Add(serie);
+                        }
+                    }
+                }
+                else
+                {
+                    resutlSeries = filteredSeries;
+                }
             }
-            
-            return null;
+            return resutlSeries;
         }
-        
-        private enum RatingType{
-        	ALL, FAVORITES, MARKED, SEEN
+
+        private enum RatingType
+        {
+            ALL, FAVORITES, MARKED, SEEN
         }
-        
+
         private void Btn_add_series_Click(object sender, System.EventArgs e)
         {
-        	Notify(this, new EventData(UcAddSeries.Instance));
+            Notify(this, new EventData(UcAddSeries.Instance));
         }
 
         private void Btn_logoutClick(object sender, System.EventArgs e)
         {
             currentUser = null;
-            Notify(this,  new EventData(UcLogin.Instance));
+            Notify(this, new EventData(UcLogin.Instance));
         }
 
-        private void Btn_favoritesClick(object sender, System.EventArgs e)
+        private void Btn_homeClick(object sender, System.EventArgs e)
         {
-            List<Series> favorites = GetListOf(RatingType.FAVORITES);
-            if (favorites != null) {
-            	tlPanel.Controls.Clear();
-            	LoadSeries(favorites);
+            List<Series> all = GetListOf(RatingType.ALL, new List<string>());
+            if (all != null)
+            {
+                tlPanel.Controls.Clear();
+                LoadSeries(all);
             }
         }
-
-        private void Btn_markedClick(object sender, System.EventArgs e)
-        {
-           List<Series> marked = GetListOf(RatingType.MARKED);
-           if (marked != null) {
-           		tlPanel.Controls.Clear();
-            	LoadSeries(marked);
-           }
-        }
-        
-		private void Btn_seenClick(object sender, System.EventArgs e)
-		{
-			List<Series> seen = GetListOf(RatingType.SEEN);
-           	if (seen != null) {
-           		tlPanel.Controls.Clear();
-            	LoadSeries(seen);
-          	}
-		}
-		
-		private void Btn_homeClick(object sender, System.EventArgs e)
-		{
-			List<Series> all = GetListOf(RatingType.ALL);
-           	if (all != null) {
-           		tlPanel.Controls.Clear();
-            	LoadSeries(all);
-          	}
-		}
 
         private void btn_filter_Click(object sender, System.EventArgs e)
         {
             if (!visible)
             {
                 pnl_filter.Visible = visible = true;
-                if(!timerBackward.Enabled)
+                pnl_filter.BringToFront();
+                if (!timerBackward.Enabled)
                     timerForward.Start();
             }
             else
             {
                 if (!timerForward.Enabled)
                 {
-                    pnl_filter.BringToFront();
                     timerBackward.Start();
                 }
             }
@@ -183,16 +184,16 @@ namespace WindowsFormsApplication1.ui.usercontrols
         private void timer_forward_Tick(object sender, EventArgs e)
         {
             //400x300
-            if (pnl_filter.Height <= filterHeight && pnl_filter.Width <= filterWidth) 
+            if (pnl_filter.Height < filterHeight && pnl_filter.Width < filterWidth)
             {
-                pnl_filter.Height += 10;
-                pnl_filter.Width += 12;
+                pnl_filter.Height += filterHeight / 10;
+                pnl_filter.Width += filterWidth / 10;
             }
-            else 
+            else
             {
                 ((Timer)sender).Stop();
             }
-                
+
         }
 
         private void timer_backward_Tick(object sender, EventArgs e)
@@ -200,8 +201,8 @@ namespace WindowsFormsApplication1.ui.usercontrols
             //400x300
             if (pnl_filter.Height > 1 && pnl_filter.Width > 1)
             {
-                pnl_filter.Height -= 10;
-                pnl_filter.Width -= 15;
+                pnl_filter.Height -= filterHeight / 10;
+                pnl_filter.Width -= filterWidth / 10;
             }
             else
             {
@@ -209,6 +210,53 @@ namespace WindowsFormsApplication1.ui.usercontrols
                 pnl_filter.Visible = visible = false;
             }
 
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            List<RatingType> types = new List<RatingType>();
+            if (cb_favorit.Checked)
+            {
+                types.Add(RatingType.FAVORITES);
+            }
+            if (cb_gesehen.Checked)
+            {
+                types.Add(RatingType.SEEN);
+            }
+            if (cb_vermerkt.Checked)
+            {
+                types.Add(RatingType.MARKED);
+            }
+
+            List<string> genres = new List<string>();
+            foreach (Control control in fp_genreList.Controls)
+            {
+                if (control.GetType() == typeof(CheckBox))
+                {
+                    CheckBox box = (CheckBox)control;
+                    if (box.Checked)
+                    {
+                        genres.Add(box.Text);
+                    }
+                }
+            }
+            tlPanel.Controls.Clear();
+
+            List<Series> resultList = new List<Series>();
+
+            if (types.Count > 0)
+                foreach (RatingType type in types)
+                    resultList = resultList.Concat(GetListOf(type, genres)).Distinct().ToList();
+            else
+                resultList = GetListOf(RatingType.ALL, genres);
+
+            LoadSeries(resultList);
+
+            //close filterPanel
+            if (!timerForward.Enabled)
+            {
+                timerBackward.Start();
+            }
         }
     }
 }

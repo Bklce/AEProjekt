@@ -36,9 +36,9 @@
             this.btn_logout = new System.Windows.Forms.Button();
             this.pnl_filter = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.cb_favorit = new System.Windows.Forms.CheckBox();
+            this.cb_gesehen = new System.Windows.Forms.CheckBox();
+            this.cb_vermerkt = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.fp_genreList = new System.Windows.Forms.FlowLayoutPanel();
             this.pnl_content = new System.Windows.Forms.Panel();
@@ -115,56 +115,55 @@
             // 
             // pnl_filter
             // 
-            this.pnl_filter.AutoSize = true;
             this.pnl_filter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_filter.Controls.Add(this.flowLayoutPanel1);
             this.pnl_filter.Controls.Add(this.button1);
             this.pnl_filter.Controls.Add(this.fp_genreList);
             this.pnl_filter.Location = new System.Drawing.Point(3, 315);
             this.pnl_filter.Name = "pnl_filter";
-            this.pnl_filter.Size = new System.Drawing.Size(375, 194);
+            this.pnl_filter.Size = new System.Drawing.Size(371, 184);
             this.pnl_filter.TabIndex = 0;
             this.pnl_filter.Visible = false;
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.checkBox1);
-            this.flowLayoutPanel1.Controls.Add(this.checkBox2);
-            this.flowLayoutPanel1.Controls.Add(this.checkBox3);
+            this.flowLayoutPanel1.Controls.Add(this.cb_favorit);
+            this.flowLayoutPanel1.Controls.Add(this.cb_gesehen);
+            this.flowLayoutPanel1.Controls.Add(this.cb_vermerkt);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(358, 39);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(363, 39);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
-            // checkBox1
+            // cb_favorit
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(3, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(58, 17);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Favorit";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cb_favorit.AutoSize = true;
+            this.cb_favorit.Location = new System.Drawing.Point(3, 3);
+            this.cb_favorit.Name = "cb_favorit";
+            this.cb_favorit.Size = new System.Drawing.Size(58, 17);
+            this.cb_favorit.TabIndex = 2;
+            this.cb_favorit.Text = "Favorit";
+            this.cb_favorit.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // cb_gesehen
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(67, 3);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(69, 17);
-            this.checkBox2.TabIndex = 3;
-            this.checkBox2.Text = "Gesehen";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.cb_gesehen.AutoSize = true;
+            this.cb_gesehen.Location = new System.Drawing.Point(67, 3);
+            this.cb_gesehen.Name = "cb_gesehen";
+            this.cb_gesehen.Size = new System.Drawing.Size(69, 17);
+            this.cb_gesehen.TabIndex = 3;
+            this.cb_gesehen.Text = "Gesehen";
+            this.cb_gesehen.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // cb_vermerkt
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(142, 3);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(68, 17);
-            this.checkBox3.TabIndex = 4;
-            this.checkBox3.Text = "Vermerkt";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.cb_vermerkt.AutoSize = true;
+            this.cb_vermerkt.Location = new System.Drawing.Point(142, 3);
+            this.cb_vermerkt.Name = "cb_vermerkt";
+            this.cb_vermerkt.Size = new System.Drawing.Size(68, 17);
+            this.cb_vermerkt.TabIndex = 4;
+            this.cb_vermerkt.Text = "Vermerkt";
+            this.cb_vermerkt.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -174,12 +173,13 @@
             this.button1.TabIndex = 5;
             this.button1.Text = "Filtern";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // fp_genreList
             // 
             this.fp_genreList.Location = new System.Drawing.Point(3, 48);
             this.fp_genreList.Name = "fp_genreList";
-            this.fp_genreList.Size = new System.Drawing.Size(358, 90);
+            this.fp_genreList.Size = new System.Drawing.Size(363, 90);
             this.fp_genreList.TabIndex = 1;
             // 
             // pnl_content
@@ -205,7 +205,6 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.pnl_content.ResumeLayout(false);
-            this.pnl_content.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -220,9 +219,9 @@
         private System.Windows.Forms.Panel pnl_filter;
         private System.Windows.Forms.FlowLayoutPanel fp_genreList;
         private System.Windows.Forms.Button btn_filter;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox cb_vermerkt;
+        private System.Windows.Forms.CheckBox cb_gesehen;
+        private System.Windows.Forms.CheckBox cb_favorit;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
