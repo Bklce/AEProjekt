@@ -69,3 +69,4 @@ C:\Users\itfa19boekelmannc\Downloads\AEProjekt-master\WindowsFormsApplication1\o
 C:\Users\itfa19boekelmannc\Downloads\AEProjekt-master\WindowsFormsApplication1\obj\Debug\Seriendatenbank.ui.userControls.Template.resources
 C:\Users\itfa19boekelmannc\Downloads\AEProjekt-master\WindowsFormsApplication1\obj\Debug\Seriendatenbank.ui.userControls.UcRegister.resources
 C:\Users\itfa19boekelmannc\Downloads\AEProjekt-master\WindowsFormsApplication1\obj\Debug\Seriendatenbank.csproj.GenerateResource.Cache
+C:\Users\itfa19lagemannj\Downloads\AEProjekt-master\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.ui.usercontrols.UcAdmin.resources
